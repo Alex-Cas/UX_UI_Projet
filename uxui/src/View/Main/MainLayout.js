@@ -15,7 +15,7 @@ class MainLayout extends Component
     render() {
         return (
             <BrowserRouter>
-                <div>
+                <div className="main">
                     <nav className="navbar navbar-expand navbar-dark bg-dark">
                         <div className="navbar-brand">
                             <Link to="/" className="nav-link">
