@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter, Route, Link } from 'react-router-dom'
 import AttractionLayout from '../Layouts/AttractionLayout.js'
 import BuildingLayout from '../Layouts/BuildingLayout.js'
+import PersonnelLayout from '../Layouts/PersonnelLayout.js'
 import Home from '../Layouts/Home.js'
 
 class MainLayout extends Component
@@ -32,11 +33,18 @@ class MainLayout extends Component
                                     Attractions
                                 </Link>
                             </li>
+                            <li className="nav-item">
+                                <Link to="/personnel" className="nav-link">
+                                    Personnel
+                                </Link>
+                            </li>
                         </ul>
                     </nav>
                     <Route exact path="/" component={() => <Home />} />
                     <Route exact path="/buildings" component={() => <BuildingLayout />} />
                     <Route exact path="/attractions" component={() => <AttractionLayout />} />
+                    <Route exact path="/personnel" component={() => <PersonnelLayout />} />
+
                 </div>
             </BrowserRouter>
         )
