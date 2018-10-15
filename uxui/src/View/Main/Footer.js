@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
+import {Container} from 'reactstrap'
 
 class Footer extends Component
 {
     render() {
         return (
             <footer className="footer">
-                <div className="container">
+                <Container>
                     <span className="text-muted">Ceci est mon FOOTEr</span>
-                </div>
+                </Container>
             </footer>
         )
     }

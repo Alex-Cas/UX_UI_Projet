@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Button} from 'reactstrap'
 import attractionsRaw from '../../Model/attractions.json'
 
 class AttractionLayout extends Component
@@ -18,7 +19,7 @@ class AttractionLayout extends Component
                 {attractionsRaw.map( (item, idx) => {
                     return (<div key={idx}>{item.name}</div>)
                 })}
-                <button onClick={this.create}>click me</button>
+                <Button onClick={this.create}>click me</Button>
             </div>
         )
     }

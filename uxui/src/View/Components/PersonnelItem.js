@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Col, Card, CardBody, CardText} from 'reactstrap'
 
 class PersonnelItem extends Component
 {
@@ -10,13 +11,16 @@ class PersonnelItem extends Component
 
     render() {
         return (
-            <div className="card mx-4 my-2 col-sm-6 col-md-4 col-lg-3" style={{'width': '18rem'}}>
-                <div className="card-body">
-                    <p className="card-text">
-                        {this.pers.firstName} {this.pers.surname}
-                    </p>
-                </div>
-            </div>
+            <Col xs={6} sm={6} md={4} lg={4} className="my-2" style={{'maxWidth': '14rem'}}>
+                <Card>
+                    <CardBody>
+                        <CardText className="text-center">
+                            {this.pers.firstName} {this.pers.surname}<br/>
+                            <i>{this.pers.salary}€</i>
+                        </CardText>
+                    </CardBody>
+                </Card>
+            </Col>
         )
     }
 }

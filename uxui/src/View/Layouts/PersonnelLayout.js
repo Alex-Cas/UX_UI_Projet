@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Container, Row} from 'reactstrap'
 import PersonnelItem from '../Components/PersonnelItem.js'
 import personnelRaw from '../../Model/personnel.json'
 
@@ -11,13 +12,13 @@ class PersonnelLayout extends Component
 
     render() {
         return (
-            <div className="container justify-content-md-center p-3">
-                <div className="row">
+            <Container className="p-3">
+                <Row className="justify-content-center">
                     {personnelRaw.map( (item, idx) => {
                         return (<PersonnelItem key={idx} personnel={item}/>)
                     })}
-                </div>
-            </div>
+                </Row>
+            </Container>
         )
     }
 }

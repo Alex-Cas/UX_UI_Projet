@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Route, Link } from 'react-router-dom'
+import {Navbar, NavbarBrand, Nav, NavItem, NavLink} from 'reactstrap'
 import AttractionLayout from '../Layouts/AttractionLayout.js'
 import BuildingLayout from '../Layouts/BuildingLayout.js'
 import PersonnelLayout from '../Layouts/PersonnelLayout.js'
 import Home from '../Layouts/Home.js'
+import Login from '../Layouts/Login.js'
 
 class MainLayout extends Component
 {
@@ -16,35 +18,33 @@ class MainLayout extends Component
         return (
             <BrowserRouter>
                 <div className="main">
-                    <nav className="navbar navbar-expand navbar-dark bg-dark">
-                        <div className="navbar-brand">
-                            <Link to="/" className="nav-link">
-                                HOME
-                            </Link>
-                        </div>
-                        <ul className="navbar-nav mr-auto">
-                            <li className="nav-item">
-                                <Link to="/buildings" className="nav-link">
-                                    Bâtiments
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link to="/attractions" className="nav-link">
-                                    Attractions
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link to="/personnel" className="nav-link">
-                                    Personnel
-                                </Link>
-                            </li>
-                        </ul>
-                    </nav>
+                    <Navbar color="dark" dark expand={true}>
+                        <NavbarBrand tag={Link} to="/">
+                            HOME
+                        </NavbarBrand>
+                        <Nav className="mr-auto" navbar>
+                            <NavLink tag={Link} to="/buildings">
+                                Bâtiments
+                            </NavLink>
+                            <NavLink tag={Link} to="/attractions">
+                                Attractions
+                            </NavLink>
+                            <NavLink tag={Link} to="/Personnel">
+                                Personnel
+                            </NavLink>
+                        </Nav>
+                        <Nav navbar>
+                            <NavLink tag={Link} to="/login">
+                                Login
+                            </NavLink>
+                        </Nav>
+                    </Navbar>
                     <Route exact path="/" component={() => <Home />} />
                     <Route exact path="/buildings" component={() => <BuildingLayout />} />
                     <Route exact path="/attractions" component={() => <AttractionLayout />} />
                     <Route exact path="/personnel" component={() => <PersonnelLayout />} />
 
+                    <Route exact path="/login" component={() => <Login />} />
                 </div>
             </BrowserRouter>
         )

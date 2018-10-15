@@ -4,7 +4,7 @@
     "firstName": "Carissa",
     "surname": "Fleming",
     "age": 33,
-    "fonction": "employee",
+    "fonction": "Employee",
     "salary": 1519.4219
   },
   {
@@ -12,7 +12,7 @@
     "firstName": "Rivers",
     "surname": "Barber",
     "age": 33,
-    "fonction": "employee",
+    "fonction": "Employee",
     "salary": 1631.1606
   },
   {
@@ -20,7 +20,7 @@
     "firstName": "Watkins",
     "surname": "Stone",
     "age": 22,
-    "fonction": "worker",
+    "fonction": "Worker",
     "salary": 1351.9223
   },
   {
@@ -28,7 +28,7 @@
     "firstName": "Pollard",
     "surname": "Brooks",
     "age": 35,
-    "fonction": "employee",
+    "fonction": "Employee",
     "salary": 1006.4578
   },
   {
@@ -36,7 +36,7 @@
     "firstName": "Mai",
     "surname": "Hansen",
     "age": 33,
-    "fonction": "employee",
+    "fonction": "Employee",
     "salary": 1284.7332
   },
   {
@@ -44,7 +44,7 @@
     "firstName": "Ayala",
     "surname": "Castaneda",
     "age": 33,
-    "fonction": "employee",
+    "fonction": "Employee",
     "salary": 1067.6199
   },
   {
@@ -52,7 +52,7 @@
     "firstName": "Yolanda",
     "surname": "Clark",
     "age": 39,
-    "fonction": "worker",
+    "fonction": "Worker",
     "salary": 1956.4517
   },
   {
@@ -60,7 +60,7 @@
     "firstName": "Kathryn",
     "surname": "Shepherd",
     "age": 20,
-    "fonction": "employee",
+    "fonction": "Employee",
     "salary": 1852.0062
   },
   {
@@ -68,7 +68,7 @@
     "firstName": "Farley",
     "surname": "Hayden",
     "age": 33,
-    "fonction": "employee",
+    "fonction": "Employee",
     "salary": 1649.6176
   },
   {
@@ -76,7 +76,7 @@
     "firstName": "Eva",
     "surname": "Ford",
     "age": 28,
-    "fonction": "boss",
+    "fonction": "Boss",
     "salary": 1506.5059
   },
   {
@@ -84,7 +84,7 @@
     "firstName": "Nichols",
     "surname": "Figueroa",
     "age": 35,
-    "fonction": "worker",
+    "fonction": "Worker",
     "salary": 1523.443
   },
   {
@@ -92,7 +92,7 @@
     "firstName": "Sara",
     "surname": "Sanford",
     "age": 22,
-    "fonction": "employee",
+    "fonction": "Employee",
     "salary": 1112.4424
   },
   {
@@ -100,7 +100,7 @@
     "firstName": "Jessie",
     "surname": "Hayes",
     "age": 39,
-    "fonction": "employee",
+    "fonction": "Employee",
     "salary": 1892.3391
   },
   {
@@ -108,7 +108,7 @@
     "firstName": "Lila",
     "surname": "Knight",
     "age": 34,
-    "fonction": "boss",
+    "fonction": "Boss",
     "salary": 1983.0015
   },
   {
@@ -116,7 +116,7 @@
     "firstName": "Isabelle",
     "surname": "Noble",
     "age": 23,
-    "fonction": "boss",
+    "fonction": "Boss",
     "salary": 1201.7075
   }
 ]
