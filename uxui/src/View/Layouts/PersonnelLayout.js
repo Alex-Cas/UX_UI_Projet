@@ -8,12 +8,9 @@ class PersonnelLayout extends Component
     constructor(props) {
         super(props)
 
-        this.init()
-    }
-
-    init() {
-
-        this.personnel = model.list()
+        this.state = {
+            personnel: model.list()
+        }
     }
 
     addPerson() {
@@ -29,10 +26,12 @@ class PersonnelLayout extends Component
     }
 
     render() {
+        var personnel = this.state.personnel
+
         return (
             <Container className="p-3">
                 <Row className="justify-content-center">
-                    {this.personnel.map( (item, idx) => {
+                    {personnel.map( (item, idx) => {
                         return (<PersonnelItem key={idx} personnel={item}/>)
                     })}
                 </Row>

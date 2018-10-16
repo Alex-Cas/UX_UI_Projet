@@ -6,19 +6,18 @@ class Building extends Component
     constructor(props) {
         super(props)
 
-        this.buildingId = parseInt(props.match.params.buildingId)
-        this.init()
-    }
-
-    init() {
-
-        this.building = model.get(this.buildingId)
+        var id = parseInt(props.match.params.buildingId)
+        this.state = {
+            building: model.get(id)
+        }
     }
 
     render() {
+        var building = this.state.building
+
         return (
             <div>
-                {this.building.name}
+                {building.name}
             </div>
         )
     }

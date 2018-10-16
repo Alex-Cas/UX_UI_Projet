@@ -6,19 +6,18 @@ class Attraction extends Component
     constructor(props) {
         super(props)
 
-        this.attractionId = parseInt(props.match.params.attractionId)
-        this.init()
-    }
-
-    init() {
-
-        this.attraction = model.get(this.attractionId)
+        var id = parseInt(props.match.params.attractionId)
+        this.state = {
+            attraction: model.get(id)
+        }
     }
 
     render() {
+        var attraction = this.state.attraction
+
         return (
             <div>
-                {this.attraction.name}
+                {attraction.name}
             </div>
         )
     }

@@ -5,14 +5,19 @@ class AttractionItem extends Component
 {
     constructor(props) {
         super(props)
-        this.attraction = props.attraction
+
+        this.state = {
+            attraction: props.attraction
+        }
     }
 
     render() {
+        var attraction = this.state.attraction
+
         return (
             <div>
-                <Link to={"/attractions/" + this.attraction.id}>
-                    {this.attraction.name}
+                <Link to={"/attractions/" + attraction.id}>
+                    {attraction.name}
                 </Link>
             </div>
         )

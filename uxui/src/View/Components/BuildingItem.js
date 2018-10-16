@@ -5,14 +5,19 @@ class BuildingItem extends Component
 {
     constructor(props) {
         super(props)
-        this.building = props.building
+
+        this.state = {
+            building: props.building
+        }
     }
 
     render() {
+        var building = this.state.building
+
         return (
             <div>
-                <Link to={"/buildings/" + this.building.id}>
-                    {this.building.name}
+                <Link to={"/buildings/" + building.id}>
+                    {building.name}
                 </Link>
             </div>
         )

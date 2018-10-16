@@ -7,19 +7,17 @@ class AttractionLayout extends Component
     constructor(props) {
         super(props)
         
-        this.init()
-    }
-
-    init() {
-
-        /*<Button onClick={this.create}>click me</Button>*/
-        this.attractions = model.list()
+        this.state = {
+            attractions: model.list()
+        }
     }
 
     render() {
+        var attractions = this.state.attractions
+
         return (
             <div>
-                {this.attractions.map( (item, idx) => {
+                {attractions.map( (item, idx) => {
                     return (<AttractionItem key={idx} attraction={item} />)
                 })}
                 

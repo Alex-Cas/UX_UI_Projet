@@ -15,8 +15,7 @@ class Person extends Component
 
     fire = () => {
 
-        var e = model.delete(this.state.person.id)
-        this.setState({person: null})
+        model.delete(this.state.person.id)
     }
 
     render() {
