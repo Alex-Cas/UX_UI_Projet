@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import {Col, Card, CardBody, CardText} from 'reactstrap'
 
 class PersonnelItem extends Component
@@ -6,17 +7,17 @@ class PersonnelItem extends Component
     constructor(props) {
         super(props)
 
-        this.pers = props.personnel
+        this.person = props.personnel
     }
 
     render() {
         return (
             <Col xs={6} sm={6} md={4} lg={4} className="my-2" style={{'maxWidth': '14rem'}}>
-                <Card>
+                <Card tag={Link} to={"/personnel/" + this.person.id}>
                     <CardBody>
                         <CardText className="text-center">
-                            {this.pers.firstName} {this.pers.surname}<br/>
-                            <i>{this.pers.salary}€</i>
+                            {this.person.firstName} {this.person.surname}<br/>
+                            <i>{this.person.salary}€</i>
                         </CardText>
                     </CardBody>
                 </Card>

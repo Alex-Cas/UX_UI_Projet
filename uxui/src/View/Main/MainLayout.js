@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
-import { BrowserRouter, Route, Link } from 'react-router-dom'
-import {Navbar, NavbarBrand, Nav, NavItem, NavLink} from 'reactstrap'
-import AttractionLayout from '../Layouts/AttractionLayout.js'
-import BuildingLayout from '../Layouts/BuildingLayout.js'
-import PersonnelLayout from '../Layouts/PersonnelLayout.js'
-import Home from '../Layouts/Home.js'
-import Login from '../Layouts/Login.js'
+import { BrowserRouter, Link } from 'react-router-dom'
+import {Navbar, NavbarBrand, Nav, NavLink} from 'reactstrap'
+import Routes from './Routes.js'
+
 
 class MainLayout extends Component
 {
@@ -29,7 +26,7 @@ class MainLayout extends Component
                             <NavLink tag={Link} to="/attractions">
                                 Attractions
                             </NavLink>
-                            <NavLink tag={Link} to="/Personnel">
+                            <NavLink tag={Link} to="/personnel">
                                 Personnel
                             </NavLink>
                         </Nav>
@@ -39,12 +36,7 @@ class MainLayout extends Component
                             </NavLink>
                         </Nav>
                     </Navbar>
-                    <Route exact path="/" component={() => <Home />} />
-                    <Route exact path="/buildings" component={() => <BuildingLayout />} />
-                    <Route exact path="/attractions" component={() => <AttractionLayout />} />
-                    <Route exact path="/personnel" component={() => <PersonnelLayout />} />
-
-                    <Route exact path="/login" component={() => <Login />} />
+                    <Routes />
                 </div>
             </BrowserRouter>
         )

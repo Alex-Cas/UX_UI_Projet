@@ -1,25 +1,28 @@
 import React, { Component } from 'react'
-import {Button} from 'reactstrap'
-import attractionsRaw from '../../Model/attractions.json'
+import AttractionItem from '../Components/AttractionItem.js'
+import model from '../../Model/Attractions.js'
 
 class AttractionLayout extends Component
 {
     constructor(props) {
         super(props)
-        console.log(attractionsRaw)
+        
+        this.init()
     }
 
-    create() {
-        attractionsRaw.push({"name": "COUCOU"})
+    init() {
+
+        /*<Button onClick={this.create}>click me</Button>*/
+        this.attractions = model.list()
     }
 
     render() {
         return (
             <div>
-                {attractionsRaw.map( (item, idx) => {
-                    return (<div key={idx}>{item.name}</div>)
+                {this.attractions.map( (item, idx) => {
+                    return (<AttractionItem key={idx} attraction={item} />)
                 })}
-                <Button onClick={this.create}>click me</Button>
+                
             </div>
         )
     }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import {Form, FormGroup, Container, Label, Input,
-    Card, CardTitle, CardBody, CardText} from 'reactstrap'
+import {Form, Container, Label, Input,
+    Card, CardTitle, CardBody} from 'reactstrap'
 
 class Login extends Component
 {

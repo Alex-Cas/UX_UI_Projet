@@ -1,22 +1,22 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-class BuildingItem extends Component
+class AttractionItem extends Component
 {
     constructor(props) {
         super(props)
-        this.building = props.building
+        this.attraction = props.attraction
     }
 
     render() {
         return (
             <div>
-                <Link to={"/buildings/" + this.building.id}>
-                    {this.building.name}
+                <Link to={"/attractions/" + this.attraction.id}>
+                    {this.attraction.name}
                 </Link>
             </div>
         )
     }
 }
 
-export default BuildingItem
+export default AttractionItem

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Container} from 'reactstrap'
 
 class Home extends Component
 {
@@ -9,9 +10,9 @@ class Home extends Component
 
     render() {
         return (
-            <div>
+            <Container>
                 HOME PAGE
-            </div>
+            </Container>
         )
     }
 }
