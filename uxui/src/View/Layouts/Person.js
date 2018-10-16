@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Button} from 'reactstrap'
 import model from '../../Model/Personnel.js'
 
 class Person extends Component
@@ -6,22 +7,31 @@ class Person extends Component
     constructor(props) {
         super(props)
 
-        this.personId = parseInt(props.match.params.personId)
-        this.init()
+        var id = parseInt(props.match.params.personId)
+        this.state = {
+            person: model.get(id)
+        }
     }
 
-    init() {
+    fire = () => {
 
-        this.person = model.get(this.personId)
+        var e = model.delete(this.state.person.id)
+        this.setState({person: null})
     }
 
     render() {
+        var person = this.state.person;
+
         return (
             <div>
-                {this.person.firstName} {this.person.surname} <br />
-                {this.person.age}years old <br />
-                Working as {this.person.fonction} <br />
-                {this.person.salary}€ per month
+                <p>
+                    {person.firstName} {person.surname} <br />
+                    {person.age} years old <br />
+                    Working as {person.fonction} <br />
+                    {person.salary}€ per month
+                </p>
+
+                <Button onClick={this.fire}>vire moi ce mec</Button>
             </div>
         )
     }
