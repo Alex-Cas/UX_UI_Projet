@@ -10,17 +10,7 @@ class Personnel
 
     static get(id) {
 
-        var personnel = StorageHelper.list('personnel')
-        var person = null
-
-        personnel.some(item => {
-            if (item.id === id) {
-                person = item
-                return true
-            }
-            return false
-        })
-
+        var person = StorageHelper.get('personnel', id)
         return person
     }
 }

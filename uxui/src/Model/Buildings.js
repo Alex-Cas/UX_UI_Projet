@@ -9,18 +9,8 @@ class Buildings
     }
 
     static get(id) {
-
-        var buildings = StorageHelper.list('buildings')
-        var building = null
-
-        buildings.some(item => {
-            if (item.id === id) {
-                building = item
-                return true
-            }
-            return false
-        })
-
+        
+        var building = StorageHelper.get('buildings', id)
         return building
     }
 }

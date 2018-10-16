@@ -11,17 +11,7 @@ class Attractions
 
     static get(id) {
 
-        var attractions = StorageHelper.list('attractions')
-        var attraction = null
-
-        attractions.some(item => {
-            if (item.id === id) {
-                attraction = item
-                return true
-            }
-            return false
-        })
-
+        var attraction = StorageHelper.get('attractions', id)
         return attraction
     }
 }
