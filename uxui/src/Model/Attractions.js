@@ -2,7 +2,6 @@ import StorageHelper from '../Helpers/StorageHelper.js'
 
 class Attractions
 {
-
     static list() {
 
         var attractions = StorageHelper.list('attractions')

@@ -16,7 +16,8 @@ class App extends Component {
         var dbs = [
             'attractions',
             'buildings',
-            'personnel'
+            'personnel',
+            'maintenances'
         ]
 
         dbs.forEach(db => {
