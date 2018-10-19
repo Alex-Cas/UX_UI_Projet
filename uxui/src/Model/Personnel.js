@@ -22,6 +22,14 @@ class Personnel
         return toReturn
     }
 
+    static update(person) {
+
+        var toReturn = null
+        toReturn = StorageHelper.update('personnel', person)
+        
+        return toReturn
+    }
+
     static delete(id) {
 
         var toReturn = false

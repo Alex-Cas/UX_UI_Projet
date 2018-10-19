@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Button} from 'reactstrap'
+import {Button, Input} from 'reactstrap'
 import MaintenanceItem from '../Components/MaintenanceItem.js'
 import model from '../../Model/Personnel.js'
 import maintenanceModel from '../../Model/Maintenances.js'
@@ -13,12 +13,64 @@ class Person extends Component
         this.state = {
             person: model.get(id),
             maintenances: maintenanceModel.list('person', id),
+            isUpdating: false,
+            newPerson: {
+                firstName: '',
+                surname: '',
+                age: 0,
+                fonction: '',
+                salary: 0
+            }
         }
     }
 
     fire = () => {
 
         model.delete(this.state.person.id)
+    }
+
+    toggleUpdate = () => {
+        
+        this.setState({isUpdating: !this.state.isUpdating})
+        console.log(this.state.person)
+    }
+
+    submitUpdate = (event) => {
+
+        var obj = {
+                id: this.state.person.id,
+                firstName: this.state.newPerson.firstName,
+                surname: this.state.newPerson.surname,
+                age: this.state.newPerson.age,
+                fonction: this.state.newPerson.fonction,
+                salary: this.state.newPerson.salary
+            }
+
+        var e = model.update(obj)
+        console.log(e)
+        event.preventDefault()
+    }
+
+    handleChange = (event) => {
+
+        this.state.newPerson[event.target.name] = event.target.value
+        this.forceUpdate()
+    }
+
+    displayForm = () => {
+
+        if (this.state.isUpdating) {
+            return (
+                <form>
+                    first name: <Input type="text" name="firstName" value={this.state.newPerson.firstName} onChange={this.handleChange} placeholder="new first name"/>
+                    surname: <Input type="text" name="surname" value={this.state.newPerson.surname} onChange={this.handleChange} placeholder="new surname"/>
+                    age: <Input type="number" name="age" value={this.state.newPerson.age} onChange={this.handleChange} placeholder="new age"/>
+                    fonction: <Input type="text" name="fonction" value={this.state.newPerson.fonction} onChange={this.handleChange} placeholder="new fonction"/>
+                    salary: <Input type="number" name="salary" value={this.state.newPerson.salary} onChange={this.handleChange} placeholder="new salary"/>
+
+                    <Button onClick={this.submitUpdate}>Submit</Button>
+                </form>)
+        }
     }
 
     render() {
@@ -35,11 +87,14 @@ class Person extends Component
                 </p>
 
                 <Button onClick={this.fire}>vire moi ce mec</Button>
-                <br />
-                Maintenances (ids): 
-                {maintenances.map( (item, idx) => {
-                    return (<MaintenanceItem key={idx} maintenance={item}/>)
-                })}
+                <div>
+                    Maintenances (ids): 
+                    {maintenances.map( (item, idx) => {
+                        return (<MaintenanceItem key={idx} maintenance={item}/>)
+                    })}
+                </div>
+                <Button onClick={this.toggleUpdate}>modifie moi ce mec</Button>
+                {this.displayForm()}
             </div>
         )
     }

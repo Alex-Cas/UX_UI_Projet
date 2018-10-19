@@ -33,6 +33,34 @@ class StorageHelper
         return true
     }
 
+    static update(key, obj)
+    {
+        var items = this.list(key)
+        var item = null
+        var idx = 0
+
+        items.some((i, index) => {
+            if (i.id === obj.id) {
+                item = i
+                idx = index
+                return true
+            }
+            return false
+        })
+
+        Object.keys(obj).forEach( (key, idx) => {
+
+            if (obj[key] !== '' && obj[key] !== 0) {
+                item[key] = obj[key]
+            }
+        })
+
+        items[idx] = item
+        this.apply(key, items)
+
+        return item
+    }
+
     static delete(key, id)
     {
         var items = this.list(key)
