@@ -2,13 +2,13 @@ import StorageHelper from '../Helpers/StorageHelper.js'
 
 class Maintenances
 {
-    static list(id) {
+    static list(context, id) {
 
         var maintenances = StorageHelper.list('maintenances')
         var toReturn = []
         
         maintenances.forEach(item => {
-            if (item.idAttraction === id) {
+            if (item[context + '_id'] === id) {
                 toReturn.push(item)
             }
         })

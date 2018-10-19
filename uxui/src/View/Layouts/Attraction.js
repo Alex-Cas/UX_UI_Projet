@@ -11,7 +11,7 @@ class Attraction extends Component
         var id = parseInt(props.match.params.attractionId)
         this.state = {
             attraction: model.get(id),
-            maintenances: maintenanceModel.list(id)
+            maintenances: maintenanceModel.list('attraction', id)
         }
     }
 
