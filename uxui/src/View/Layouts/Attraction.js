@@ -22,9 +22,12 @@ class Attraction extends Component
         return (
             <div>
                 {attraction.name}<br/>
+                {attraction.date}<br/>
                 Maintenances (ids): 
                 {maintenances.map( (item, idx) => {
-                    return (<MaintenanceItem key={idx} maintenance={item}/>)
+                    return (
+                            <MaintenanceItem key={idx} maintenance={item}/>
+                    )
                 })}
             </div>
         )
