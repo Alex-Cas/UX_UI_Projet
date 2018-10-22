@@ -5,9 +5,9 @@ class Footer extends Component
 {
     render() {
         return (
-            <footer className="footer">
+            <footer className="text-white footer bg-secondary">
                 <Container>
-                    <span className="text-muted">Ceci est mon FOOTEr</span>
+                    <span>Ceci est mon FOOTEr</span>
                 </Container>
             </footer>
         )

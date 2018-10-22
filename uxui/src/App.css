@@ -43,3 +43,7 @@
 .main {
     min-height: 85vh;
 }
+
+.btn.disabled {
+    pointer-events: none;
+}

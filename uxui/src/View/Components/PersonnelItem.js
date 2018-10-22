@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import {Col, Card, CardBody, CardText} from 'reactstrap'
+import {Col, Card, CardBody, CardText, CardImg} from 'reactstrap'
 
 class PersonnelItem extends Component
 {
@@ -16,9 +16,10 @@ class PersonnelItem extends Component
         var person = this.state.person
 
         return (
-            <Col xs={6} sm={6} md={4} lg={4} className="my-2" style={{'maxWidth': '14rem'}}>
+            <Col xs={6} sm={6} md={4} lg={4} className="my-2" style={{'maxWidth': '175px'}}>
                 <Card tag={Link} to={"/personnel/" + person.id}>
-                    <CardBody>
+                    <CardImg style={{'height': '175px'}} width="100%" src={require("../../img/"+ String(Math.floor(Math.random() * 8) + 1) +".png")} />
+                    <CardBody style={{'height': '7rem'}}>
                         <CardText className="text-center">
                             {person.firstName} {person.surname}<br/>
                             <i>{person.salary}€</i>

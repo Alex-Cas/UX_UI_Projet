@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {Modal, ModalHeader, ModalBody, ModalFooter, 
     Button, Form, FormGroup, Label, Input, InputGroup,
     InputGroupAddon, InputGroupText,
-    Container, Row} from 'reactstrap'
+    Container, Row, UncontrolledTooltip} from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
@@ -135,9 +135,15 @@ class NewPerson extends Component
     }
 
     renderConfirm = () => {
-        //TODO: tooltip quand il est disabled
         return (
-            <Button disabled={this.state.totalValid ? false: true} onClick={() => {this.props.handler(this.state.person)}} color="dark">Ajouter</Button>
+            <div>
+                <div id="confirmButton">
+                    <Button disabled={this.state.totalValid ? false: true} onClick={() => {this.props.handler(this.state.person)}} color="dark">Ajouter</Button>
+                </div>
+                <UncontrolledTooltip placement="top" target="confirmButton">
+                    <small>Veuillez remplir tous les champs.</small>
+                </UncontrolledTooltip>
+            </div>
         )
     }
 
