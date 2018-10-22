@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Container, Row, Button} from 'reactstrap'
+import {Container, Row, Button, Card, CardTitle} from 'reactstrap'
 import PersonnelItem from '../Components/PersonnelItem.js'
 import Modal  from '../Components/Modals/NewPerson.js'
 import model from '../../Model/Personnel.js'
@@ -33,12 +33,18 @@ class PersonnelLayout extends Component
         return (
             <Container className="p-3">
                 <Row className="justify-content-center">
-                    {personnel.map( (item, idx) => {
-                        return (<PersonnelItem key={idx} personnel={item}/>)
-                    })}
-                </Row>
-                <Modal handler={this.addPerson} />
-            
+                    <Card body>
+                        <CardTitle>
+                            PERSONNEL DU PARC
+                            <div className="float-right"><Modal handler={this.addPerson}/></div>
+                        </CardTitle>
+                        <Row className="justify-content-center">
+                        {personnel.map( (item, idx) => {
+                            return (<PersonnelItem key={idx} personnel={item}/>)
+                        })}
+                        </Row>
+                    </Card>
+                </Row>            
             </Container>
         )
     }
