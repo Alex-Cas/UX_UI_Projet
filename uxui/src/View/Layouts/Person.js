@@ -156,11 +156,11 @@ class Person extends Component
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi eros, gravida ut purus eu, egestas convallis libero. Phasellus fringilla nec nunc non ornare. Nulla sit amet posuere eros. Vestibulum id risus quis est lobortis vehicula. Nulla mattis leo vitae sagittis tristique. Maecenas arcu sapien, ullamcorper eu pretium sit amet, iaculis lobortis metus.
                             </div>
                         </Col>
-                        <Button onClick={this.toggleEdit} style={{'top': '10px', 'right': '10px', 'position': 'absolute', 'width' :'38px'}} color="success">
-                            <FontAwesomeIcon icon="check"/>
-                        </Button>
-                        <Button onClick={this.toggleEdit} style={{'top': '55px', 'right': '10px', 'position': 'absolute', 'width' :'38px'}} color="danger">
+                        <Button onClick={this.toggleEdit} style={{'top': '10px', 'right': '10px', 'position': 'absolute', 'width' :'38px'}} color="danger">
                             <FontAwesomeIcon icon="times"/>
+                        </Button>
+                        <Button onClick={this.toggleEdit} style={{'top': '55px', 'right': '10px', 'position': 'absolute', 'width' :'38px'}} color="success">
+                            <FontAwesomeIcon icon="check"/>
                         </Button>
                     </Row>
                     <CardBody>
