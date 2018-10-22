@@ -3,6 +3,8 @@ import {Modal, ModalHeader, ModalBody, ModalFooter,
     Button, Form, FormGroup, Label, Input, InputGroup,
     InputGroupAddon, InputGroupText,
     Container, Row} from 'reactstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 class NewPerson extends Component
 {
@@ -12,11 +14,11 @@ class NewPerson extends Component
         this.state = {
             isOpen: false,
             person: {
-                firstName: '',
-                surname: '',
-                age: 1,
-                salary: 1,
-                fonction: ''
+                firstName: null,
+                surname: null,
+                age: null,
+                salary: null,
+                fonction: null
             },
             valid: {
                 firstName: true,
@@ -24,7 +26,8 @@ class NewPerson extends Component
                 age: true,
                 salary: true,
                 fonction: true
-            }
+            },
+            totalValid: false
         }
     }
 
@@ -41,7 +44,7 @@ class NewPerson extends Component
         valid[event.target.name] = this.verify(event.target.type, event.target.value)
         person[event.target.name] = event.target.value
 
-        this.setState({valid, person})
+        this.setState({valid, person}, () => {this.updateTotalValid()})
     }
 
     verify = (type, value) => {
@@ -61,6 +64,40 @@ class NewPerson extends Component
                 }
         }
         return toReturn
+    }
+
+    updateTotalValid = () => {
+
+        var valid = {...this.state.valid}
+        var person = {...this.state.person}
+        var total = true
+
+        for (let [key, value] of Object.entries(valid)) {
+
+            if (value === false) {
+
+                total = false
+            }
+        }
+
+        for (let [key, value] of Object.entries(person)) {
+
+            if (value === null) {
+
+                total = false
+            }
+        }
+
+        this.setState({totalValid: total})
+        console.log(this.state.totalValid)
+    }
+
+    tryAdd = () => {
+
+        //TODO: try add, verifica"tion -> add
+        
+
+        
     }
 
     renderForm = () => {
@@ -94,14 +131,20 @@ class NewPerson extends Component
                 </FormGroup>
                 <small className="text-danger">* Champs obligatoires</small>
             </Form>
+        )
+    }
 
+    renderConfirm = () => {
+        //TODO: tooltip quand il est disabled
+        return (
+            <Button disabled={this.state.totalValid ? false: true} onClick={() => {this.props.handler(this.state.person)}} color="dark">Ajouter</Button>
         )
     }
 
     render() {
         return (
             <div>
-                <Button onClick={this.toggle}>Ajoute un mec</Button>
+                <Button onClick={this.toggle} color="success"><FontAwesomeIcon icon="plus" />&nbsp; Ajouter un salarié</Button>
                 <Modal isOpen={this.state.isOpen} toggle={this.toggle}>
                     <ModalHeader>
                         Ajout de salarié
@@ -109,12 +152,11 @@ class NewPerson extends Component
                     <ModalBody>
                         <Container>
                             {this.renderForm()}
-                            
                         </Container>
                     </ModalBody>
                     <ModalFooter>
-                        <Button onClick={() => this.props.handler(this.state.person)}>Ajoute le !</Button>
-                        <Button onClick={this.toggle}>Ferme moi ce modal</Button>
+                        {this.renderConfirm()}
+                        <Button onClick={this.toggle} color="danger">Annuler</Button>
                     </ModalFooter>
                 </Modal>
             </div>

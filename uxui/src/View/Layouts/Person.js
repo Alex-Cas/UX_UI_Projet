@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import {Button, Input} from 'reactstrap'
+import {Button, Input, Form, Container, Card,
+    CardBody, CardTitle, Col, Row} from 'reactstrap'
 import MaintenanceItem from '../Components/MaintenanceItem.js'
 import model from '../../Model/Personnel.js'
 import maintenanceModel from '../../Model/Maintenances.js'
@@ -62,7 +63,7 @@ class Person extends Component
 
         if (this.state.isUpdating) {
             return (
-                <form>
+                <Form>
                     first name: <Input type="text" name="firstName" value={this.state.newPerson.firstName} onChange={this.handleChange} placeholder="new first name"/>
                     surname: <Input type="text" name="surname" value={this.state.newPerson.surname} onChange={this.handleChange} placeholder="new surname"/>
                     age: <Input type="number" name="age" value={this.state.newPerson.age} onChange={this.handleChange} placeholder="new age"/>
@@ -70,8 +71,30 @@ class Person extends Component
                     salary: <Input type="number" name="salary" value={this.state.newPerson.salary} onChange={this.handleChange} placeholder="new salary"/>
 
                     <Button onClick={this.submitUpdate}>Submit</Button>
-                </form>)
+                </Form>)
         }
+    }
+
+    renderProfile = () => {
+        return (
+            <Container className="pt-5">
+                <Card body>
+                    <CardTitle>
+                        <Row>
+                            <Col md={5} className="text-center">
+                                PHOTO
+                            </Col>
+                            <Col md={7} className="text-center">
+                                NOM PRENOM ETC
+                            </Col>
+                        </Row>
+                    </CardTitle>
+                    <CardBody>
+                        le reste
+                    </CardBody>
+                </Card>
+            </Container>
+        )
     }
 
     render() {
@@ -80,6 +103,7 @@ class Person extends Component
 
         return (
             <div>
+                {this.renderProfile()}
                 <p>
                     {person.firstName} {person.surname} <br />
                     {person.age} years old <br />

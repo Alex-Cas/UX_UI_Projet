@@ -13,7 +13,7 @@ class Footer extends Component
 {
     render() {
         return (
-            <div>
+            <div className="bg-light">
                 <Route exact path="/" component={Home} />
 
                 <Route exact path="/buildings" component={BuildingLayout} />
