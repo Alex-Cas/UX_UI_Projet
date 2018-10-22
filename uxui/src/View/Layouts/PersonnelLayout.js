@@ -14,7 +14,7 @@ class PersonnelLayout extends Component
         }
     }
 
-    addPerson = () => {
+    addPerson = (person) => {
         var obj = {
             'firstName': 'Alexandre',
             'surname': 'Casara',
@@ -22,7 +22,7 @@ class PersonnelLayout extends Component
             'fonction': 'Big Boss',
             'salary': 9000
         }
-        var e = model.create(obj)
+        var e = model.create(person)
         this.setState({personnel: model.list()})
         console.log(e)
     }
