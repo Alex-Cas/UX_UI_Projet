@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import {Modal, ModalHeader, ModalBody, ModalFooter, 
     Button, Form, FormGroup, Label, Input, InputGroup,
     InputGroupAddon, InputGroupText,
-    Container, Row, UncontrolledTooltip} from 'reactstrap'
+    Container, Row, Tooltip} from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Ask from './Ask.js'
+import Confirm from './Confirm.js'
 
 
 class NewPerson extends Component
@@ -27,13 +29,31 @@ class NewPerson extends Component
                 salary: true,
                 fonction: true
             },
-            totalValid: false
+            totalValid: false,
+            tooltipOpen: false,
+            asked: false,
+            confirm: false
         }
     }
 
     toggle = () => {
 
         this.setState({isOpen: !this.state.isOpen})
+    }
+
+    toggleTooltip = () => {
+
+        this.setState({tooltipOpen: !this.state.tooltipOpen})
+    }
+
+    toggleAsk = () => {
+
+        this.setState({asked: !this.state.asked})
+    }
+
+    toggleConfirm = () => {
+
+        this.setState({confirm: !this.state.confirm})
     }
 
     handleChange = (event) => {
@@ -89,15 +109,6 @@ class NewPerson extends Component
         }
 
         this.setState({totalValid: total})
-        console.log(this.state.totalValid)
-    }
-
-    tryAdd = () => {
-
-        //TODO: try add, verifica"tion -> add
-        
-
-        
     }
 
     renderForm = () => {
@@ -134,17 +145,37 @@ class NewPerson extends Component
         )
     }
 
-    renderConfirm = () => {
+    renderAdd = () => {
         return (
             <div>
                 <div id="confirmButton">
-                    <Button disabled={this.state.totalValid ? false: true} onClick={() => {this.props.handler(this.state.person)}} color="dark">Ajouter</Button>
+                    <Button disabled={this.state.totalValid ? false: true} onClick={this.toggleAsk} color="dark">Ajouter</Button>
                 </div>
-                <UncontrolledTooltip placement="top" target="confirmButton">
+                <Tooltip placement="top" target="confirmButton" toggle={this.toggleTooltip} isOpen={!this.state.totalValid && this.state.tooltipOpen}>
                     <small>Veuillez remplir tous les champs.</small>
-                </UncontrolledTooltip>
+                </Tooltip>
             </div>
         )
+    }
+
+    renderAsk = () => {
+
+        if (this.state.asked === true) {
+
+            return (
+                <Ask confirm={this.props.handler} item={this.state.person} toggle={this.toggle} toggleAsk={this.toggleAsk} toggleConfirm={this.toggleConfirm} />
+            )
+        }
+    }
+
+    renderConfirm = () => {
+
+        if (this.state.confirm === true) {
+            
+            return (
+                <Confirm ok={this.toggleConfirm} item={this.state.person}/>
+            )
+        }
     }
 
     render() {
@@ -161,10 +192,12 @@ class NewPerson extends Component
                         </Container>
                     </ModalBody>
                     <ModalFooter>
-                        {this.renderConfirm()}
+                        {this.renderAdd()}
                         <Button onClick={this.toggle} color="danger">Annuler</Button>
                     </ModalFooter>
                 </Modal>
+                {this.renderAsk()}
+                {this.renderConfirm()}
             </div>
         )
     }
