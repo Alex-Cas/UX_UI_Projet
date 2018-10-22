@@ -5,7 +5,6 @@ import {Modal, ModalHeader, ModalBody, ModalFooter,
     Container, Row, Tooltip} from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Ask from './Ask.js'
-import Confirm from './Confirm.js'
 
 
 class NewPerson extends Component
@@ -14,7 +13,7 @@ class NewPerson extends Component
         super(props)
 
         this.state = {
-            isOpen: false,
+            isOpen: true,
             person: {
                 firstName: null,
                 surname: null,
@@ -31,14 +30,8 @@ class NewPerson extends Component
             },
             totalValid: false,
             tooltipOpen: false,
-            asked: false,
-            confirm: false
+            asked: false
         }
-    }
-
-    toggle = () => {
-
-        this.setState({isOpen: !this.state.isOpen})
     }
 
     toggleTooltip = () => {
@@ -49,11 +42,6 @@ class NewPerson extends Component
     toggleAsk = () => {
 
         this.setState({asked: !this.state.asked})
-    }
-
-    toggleConfirm = () => {
-
-        this.setState({confirm: !this.state.confirm})
     }
 
     handleChange = (event) => {
@@ -163,26 +151,18 @@ class NewPerson extends Component
         if (this.state.asked === true) {
 
             return (
-                <Ask confirm={this.props.handler} item={this.state.person} toggle={this.toggle} toggleAsk={this.toggleAsk} toggleConfirm={this.toggleConfirm} />
+                <Ask confirm={this.props.handler} item={this.state.person} toggle={this.props.toggle} toggleAsk={this.toggleAsk} toggleConfirm={this.props.toggleConfirm} />
             )
         }
     }
 
-    renderConfirm = () => {
-
-        if (this.state.confirm === true) {
-            
-            return (
-                <Confirm ok={this.toggleConfirm} item={this.state.person}/>
-            )
-        }
-    }
+    
 
     render() {
         return (
             <div>
-                <Button onClick={this.toggle} color="success"><FontAwesomeIcon icon="plus" />&nbsp; Ajouter un salarié</Button>
-                <Modal isOpen={this.state.isOpen} toggle={this.toggle}>
+               
+                <Modal isOpen={this.state.isOpen} toggle={this.props.toggle}>
                     <ModalHeader>
                         Ajout de salarié
                     </ModalHeader>
@@ -193,11 +173,10 @@ class NewPerson extends Component
                     </ModalBody>
                     <ModalFooter>
                         {this.renderAdd()}
-                        <Button onClick={this.toggle} color="danger">Annuler</Button>
+                        <Button onClick={this.props.toggle} color="danger">Annuler</Button>
                     </ModalFooter>
                 </Modal>
                 {this.renderAsk()}
-                {this.renderConfirm()}
             </div>
         )
     }
