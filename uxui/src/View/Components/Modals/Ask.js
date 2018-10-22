@@ -20,7 +20,6 @@ class Ask extends Component
     confirm = () => {
 
         this.props.confirm(this.state.person)
-        this.props.toggleAsk()
         this.props.toggle()
         this.props.toggleConfirm()
 
