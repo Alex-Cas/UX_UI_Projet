@@ -42,13 +42,6 @@ class NewPerson extends Component
         person[event.target.name] = event.target.value
 
         this.setState({valid, person})
-
-        /*this.setState({
-            person: {[event.target.name]: event.target.value},
-            valid: {[event.target.name]: this.verify(event.target.type, event.target.value)}
-        })*/
-        console.log(this.state.person)
-        this.forceUpdate()
     }
 
     verify = (type, value) => {
