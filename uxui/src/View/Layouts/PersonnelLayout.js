@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Container, Row, Button} from 'reactstrap'
 import PersonnelItem from '../Components/PersonnelItem.js'
+import Modal  from '../Components/Modals/NewPerson.js'
 import model from '../../Model/Personnel.js'
 
 class PersonnelLayout extends Component
@@ -13,7 +14,7 @@ class PersonnelLayout extends Component
         }
     }
 
-    addPerson() {
+    addPerson = () => {
         var obj = {
             'firstName': 'Alexandre',
             'surname': 'Casara',
@@ -22,6 +23,7 @@ class PersonnelLayout extends Component
             'salary': 9000
         }
         var e = model.create(obj)
+        this.setState({personnel: model.list()})
         console.log(e)
     }
 
@@ -35,7 +37,8 @@ class PersonnelLayout extends Component
                         return (<PersonnelItem key={idx} personnel={item}/>)
                     })}
                 </Row>
-                <Button onClick={this.addPerson} >AJOUTER Personne</Button>
+                <Modal handler={this.addPerson} />
+            
             </Container>
         )
     }

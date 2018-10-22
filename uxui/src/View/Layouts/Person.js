@@ -48,6 +48,7 @@ class Person extends Component
 
         var e = model.update(obj)
         console.log(e)
+        this.setState({person: model.get(this.state.person.id)})
         event.preventDefault()
     }
 

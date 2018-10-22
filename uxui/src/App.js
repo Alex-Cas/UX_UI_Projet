@@ -21,9 +21,11 @@ class App extends Component {
         ]
 
         dbs.forEach(db => {
-            import(this.dataPath + db + '.json').then(item => {
-                localStorage.setItem(db, JSON.stringify(item.default))
-            })
+            if (localStorage.getItem(db) === null) {
+                import(this.dataPath + db + '.json').then(item => {
+                    localStorage.setItem(db, JSON.stringify(item.default))
+                })
+            }
         })        
     }
 
