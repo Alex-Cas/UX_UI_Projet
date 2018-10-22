@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import {Button, Input, Form, Container, Card,
-    CardBody, CardTitle, Col, Row} from 'reactstrap'
+    CardBody, CardTitle, Col, Row, CardImg,
+    FormGroup, Label} from 'reactstrap'
 import MaintenanceItem from '../Components/MaintenanceItem.js'
 import model from '../../Model/Personnel.js'
 import maintenanceModel from '../../Model/Maintenances.js'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class Person extends Component
 {
@@ -21,7 +23,9 @@ class Person extends Component
                 age: 0,
                 fonction: '',
                 salary: 0
-            }
+            },
+            isEditing: false
+
         }
     }
 
@@ -34,6 +38,11 @@ class Person extends Component
         
         this.setState({isUpdating: !this.state.isUpdating})
         console.log(this.state.person)
+    }
+
+    toggleEdit = () => {
+
+        this.setState({isEditing: !this.state.isEditing})
     }
 
     submitUpdate = (event) => {
@@ -75,26 +84,122 @@ class Person extends Component
         }
     }
 
-    renderProfile = () => {
+    renderStaticProfile = () => {
+        var person = this.state.person
+
         return (
             <Container className="pt-5">
-                <Card body>
-                    <CardTitle>
-                        <Row>
-                            <Col md={5} className="text-center">
-                                PHOTO
+                <Card body style={{'maxWidth': '75%'}} className="m-auto">
+                    <Row>
+                        <Col xs={12} sm={4} md={4}>
+                            <CardImg style={{'maxWidth': '150px', 'minWidth': '80px'}} alt="Photo de profil" src={require("../../img/"+ String(person.id % 8 + 1) +".png")} />
+                        </Col>
+                        <Col xs={12} sm={7} md={7} className="text-center">
+                            <CardTitle>{person.firstName} {person.surname}</CardTitle>
+                            <div className="text-left">
+                                Biographie: <br />
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi eros, gravida ut purus eu, egestas convallis libero. Phasellus fringilla nec nunc non ornare. Nulla sit amet posuere eros. Vestibulum id risus quis est lobortis vehicula. Nulla mattis leo vitae sagittis tristique. Maecenas arcu sapien, ullamcorper eu pretium sit amet, iaculis lobortis metus.
+                            </div>
+                        </Col>
+                        <Button onClick={this.toggleEdit} style={{'top': '10px', 'right': '10px', 'position': 'absolute'}}>
+                            <FontAwesomeIcon icon="pen"/>
+                        </Button>
+                    </Row>
+                    <CardBody>
+                        <Row className="text-center">
+                            <Col xs={4}>
+                                <FontAwesomeIcon color="green" icon="money-check-alt" size="lg" /> {person.salary} €
                             </Col>
-                            <Col md={7} className="text-center">
-                                NOM PRENOM ETC
+                            <Col xs={4}>
+                                <FontAwesomeIcon icon="user" size="lg" /> {person.age} ans
+                            </Col>
+                            <Col xs={4}>
+                                <FontAwesomeIcon color="blue" icon="briefcase" size="lg" /> {person.fonction}
                             </Col>
                         </Row>
-                    </CardTitle>
-                    <CardBody>
-                        le reste
                     </CardBody>
                 </Card>
             </Container>
         )
+    }
+
+    renderEditProfile = () => {
+
+        var person = this.state.person
+
+        return (
+            <Container className="pt-5">
+                <Card body style={{'maxWidth': '75%'}} className="m-auto">
+                    <Row>
+                        <Col xs={12} sm={4} md={4}>
+                            <CardImg style={{'maxWidth': '150px', 'minWidth': '80px'}} alt="Photo de profil" src={require("../../img/"+ String(person.id % 8 + 1) +".png")} />
+                        </Col>
+                        <Col xs={12} sm={7} md={7} className="text-center">
+                            <Row form>
+                                <Col sm={6}>
+                                    <FormGroup>
+                                        <Label className="float-left">Prénom</Label>
+                                        <Input onChange={this.handleChange} type="text" name="firstName" placeholder={person.firstName} />
+                                    </FormGroup>
+                                </Col>
+                                <Col sm={6}>
+                                <FormGroup>
+                                    <Label className="float-left">Nom de famille</Label>
+                                    <Input onChange={this.handleChange} type="text" name="surname" placeholder={person.surname} />
+                                </FormGroup>
+                                </Col>
+
+
+                            </Row>
+                            <div className="text-left">
+                                Biographie: <br />
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi eros, gravida ut purus eu, egestas convallis libero. Phasellus fringilla nec nunc non ornare. Nulla sit amet posuere eros. Vestibulum id risus quis est lobortis vehicula. Nulla mattis leo vitae sagittis tristique. Maecenas arcu sapien, ullamcorper eu pretium sit amet, iaculis lobortis metus.
+                            </div>
+                        </Col>
+                        <Button onClick={this.toggleEdit} style={{'top': '10px', 'right': '10px', 'position': 'absolute', 'width' :'38px'}} color="success">
+                            <FontAwesomeIcon icon="check"/>
+                        </Button>
+                        <Button onClick={this.toggleEdit} style={{'top': '55px', 'right': '10px', 'position': 'absolute', 'width' :'38px'}} color="danger">
+                            <FontAwesomeIcon icon="times"/>
+                        </Button>
+                    </Row>
+                    <CardBody>
+                        <Row className="text-center">
+                            <Col xs={4}>
+                                <FontAwesomeIcon color="green" icon="money-check-alt" size="lg" /> {person.salary} €
+                            </Col>
+                            <Col xs={4}>
+                                <FontAwesomeIcon icon="user" size="lg" /> {person.age} ans
+                            </Col>
+                            <Col xs={4}>
+                                <FontAwesomeIcon color="blue" icon="briefcase" size="lg" /> {person.fonction}
+                            </Col>
+                        </Row>
+                    </CardBody>
+                </Card>
+            </Container>
+        )
+    }
+
+    renderProfile = () => {
+
+        if (this.state.isEditing === true) {
+
+            return (
+                <div>
+                    {this.renderEditProfile()}
+                </div>
+            )
+        }
+        else {
+
+            return (
+                <div>
+                    {this.renderStaticProfile()}
+                </div>
+            )
+        }
+
     }
 
     render() {

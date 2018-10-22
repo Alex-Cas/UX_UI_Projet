@@ -4,9 +4,9 @@ import MainLayout from './View/Main/MainLayout.js';
 import Footer from './View/Main/Footer.js';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faMoneyCheckAlt, faUser, faBriefcase, faPen, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faPlus)
+library.add(faPlus, faMoneyCheckAlt, faUser, faBriefcase, faPen, faCheck, faTimes)
 
 class App extends Component {
 
