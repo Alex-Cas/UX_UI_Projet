@@ -15,7 +15,6 @@ class AttractionItem extends Component
 
     render() {
         var attraction = this.state.attraction
-
         return (
             <Col xs={6} sm={6} md={4} lg={4} className="my-2" style={{'maxWidth': '14rem'}}>
                 <Card tag={Link} to={"/attractions/" + attraction.id}>

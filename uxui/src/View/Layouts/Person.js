@@ -3,8 +3,10 @@ import {Button, Input, Form, Container, Card,
     CardBody, CardTitle, Col, Row, CardImg,
     FormGroup, Label} from 'reactstrap'
 import MaintenanceItem from '../Components/MaintenanceItem.js'
+import AttractionItem from '../Components/AttractionItem.js'
 import model from '../../Model/Personnel.js'
 import maintenanceModel from '../../Model/Maintenances.js'
+import attrationsModel from '../../Model/Attractions.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class Person extends Component
@@ -16,6 +18,7 @@ class Person extends Component
         this.state = {
             person: model.get(id),
             maintenances: maintenanceModel.list('person', id),
+            attractions: attrationsModel.list(),
             isUpdating: false,
             newPerson: {
                 firstName: '',
@@ -24,8 +27,8 @@ class Person extends Component
                 fonction: '',
                 salary: 0
             },
-            isEditing: false
-
+            isEditing: false,
+            seeMaintenance: false
         }
     }
 
@@ -43,6 +46,11 @@ class Person extends Component
     toggleEdit = () => {
 
         this.setState({isEditing: !this.state.isEditing})
+    }
+
+    toggleMaintenance = () => {
+
+        this.setState({seeMaintenance: !this.state.seeMaintenance})
     }
 
     submitUpdate = (event) => {
@@ -118,6 +126,14 @@ class Person extends Component
                             </Col>
                         </Row>
                     </CardBody>
+                    <Row className="text-center">
+                        <Col xs={12}>
+                            <Button onClick={this.toggleMaintenance}>
+                                Maintenance
+                            </Button>
+                        </Col>
+                        {this.renderProfileMaintenance()}
+                    </Row>
                 </Card>
             </Container>
         )
@@ -180,6 +196,26 @@ class Person extends Component
             </Container>
         )
     }
+    renderProfileMaintenance = () => {
+        var maintenances = this.state.maintenances
+        var attractions = this.state.attractions
+
+        if(this.state.seeMaintenance)
+        {
+            return (
+                <div>
+                    {maintenances.map((item, idx) => {
+                        return (
+                            <div>
+                                <AttractionItem key={item.attraction_id} attraction={attractions[item.attraction_id]}/>
+                                <MaintenanceItem key={idx} maintenance={item}/>
+                            </div>
+                        )
+                    })}
+                </div>
+            )
+        }
+    }
 
     renderProfile = () => {
 
@@ -200,29 +236,14 @@ class Person extends Component
             )
         }
 
+
     }
 
     render() {
-        var person = this.state.person
-        var maintenances = this.state.maintenances
-
         return (
             <div>
                 {this.renderProfile()}
-                <p>
-                    {person.firstName} {person.surname} <br />
-                    {person.age} years old <br />
-                    Working as {person.fonction} <br />
-                    {person.salary}€ per month<br />
-                </p>
-
                 <Button onClick={this.fire}>vire moi ce mec</Button>
-                <div>
-                    Maintenances (ids): 
-                    {maintenances.map( (item, idx) => {
-                        return (<MaintenanceItem key={idx} maintenance={item}/>)
-                    })}
-                </div>
                 <Button onClick={this.toggleUpdate}>modifie moi ce mec</Button>
                 {this.displayForm()}
             </div>

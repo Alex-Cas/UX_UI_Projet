@@ -14,6 +14,7 @@ class PersonnelItem extends Component
 
     render() {
         var person = this.state.person
+        console.log(person)
 
         return (
             <Col xs={6} sm={6} md={4} lg={4} className="my-2" style={{'maxWidth': '175px'}}>

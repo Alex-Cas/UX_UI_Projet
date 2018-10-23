@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import MaintenanceItem from '../Components/MaintenanceItem.js'
 import model from '../../Model/Attractions.js'
 import maintenanceModel from '../../Model/Maintenances.js'
+import personnelModel from "../../Model/Personnel";
+import PersonnelItem from '../Components/PersonnelItem.js'
+
 
 class Attraction extends Component
 {
@@ -26,8 +29,11 @@ class Attraction extends Component
                 Maintenances (ids): 
                 {maintenances.map( (item, idx) => {
                     return (
+                        <div>
                             <MaintenanceItem key={idx} maintenance={item}/>
-                    )
+                            <PersonnelItem personnel={personnelModel.get(item.person_id)}/>
+                        </div>
+                )
                 })}
             </div>
         )
