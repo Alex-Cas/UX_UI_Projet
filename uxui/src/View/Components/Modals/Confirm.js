@@ -8,7 +8,7 @@ class Confirm extends Component
         super(props)
 
         this.state = {
-            person: props.item
+            item: props.item
         }
     }
 
@@ -22,7 +22,7 @@ class Confirm extends Component
             <div>
                 <Modal isOpen={true}>
                     <ModalBody>
-                        {this.state.person.firstName} {this.state.person.surname} a bien été ajouté.
+                        {this.props.text}
                     </ModalBody>
                     <ModalFooter>
                         <Button onClick={this.ok} color="dark">Ok</Button>

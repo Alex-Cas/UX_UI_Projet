@@ -121,12 +121,12 @@ class NewPerson extends Component
                         <InputGroupAddon addonType="prepend">
                             <InputGroupText>€</InputGroupText>
                         </InputGroupAddon>
-                        <Input invalid={this.state.valid.salary ? false : true} onChange={this.handleChange} type="number" name="salary" placeholder="Entre le salaire" />
+                        <Input invalid={this.state.valid.salary ? false : true} onChange={this.handleChange} type="number" name="salary" placeholder="Entrez le salaire" />
                     </InputGroup>
                 </FormGroup>
                 <FormGroup>
                     <Label>Fonction <span className="text-danger">*</span></Label>
-                    <Input invalid={this.state.valid.fonction ? false : true} onChange={this.handleChange} type="text" name="fonction" placeholder="Entre la fonction"/>
+                    <Input invalid={this.state.valid.fonction ? false : true} onChange={this.handleChange} type="text" name="fonction" placeholder="Entrez la fonction"/>
                 </FormGroup>
                 <small className="text-danger">* Champs obligatoires</small>
             </Form>
@@ -148,10 +148,12 @@ class NewPerson extends Component
 
     renderAsk = () => {
 
-        if (this.state.asked === true) {
+       if (this.state.asked === true) {
 
+            var person = this.state.person
             return (
-                <Ask confirm={this.props.handler} item={this.state.person} toggle={this.props.toggle} toggleAsk={this.toggleAsk} toggleConfirm={this.props.toggleConfirm} />
+                <Ask confirm={this.props.handler} item={this.state.person} toggle={this.props.toggle} toggleAsk={this.toggleAsk} toggleConfirm={this.props.toggleConfirm}
+                    text={'Êtes vous sûr de vouloir ajouter ' + this.state.person.firstName + ' ' + this.state.person.surname + ' ?'} />
             )
         }
     }

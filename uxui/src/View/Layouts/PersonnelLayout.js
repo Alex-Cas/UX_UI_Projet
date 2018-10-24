@@ -33,7 +33,6 @@ class PersonnelLayout extends Component
 
         var e = model.create(person)
         this.setState({personnel: model.list(), newPerson: person})
-        console.log(e)
     }
 
     displayAdd = () => {
@@ -52,7 +51,7 @@ class PersonnelLayout extends Component
         if (this.state.confirm === true) {
             
             return (
-                <Confirm ok={this.toggleConfirm} item={this.state.newPerson}/>
+                <Confirm ok={this.toggleConfirm} item={this.state.newPerson} text={this.state.newPerson.firstName + ' ' + this.state.newPerson.surname + ' a bien été ajouté.'}/>
             )
         }
     }

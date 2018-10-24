@@ -8,7 +8,8 @@ class Ask extends Component
         super(props)
 
         this.state = {
-            person: props.item
+            item: props.item,
+            text: props.text
         }
     }
 
@@ -19,10 +20,10 @@ class Ask extends Component
 
     confirm = () => {
 
-        this.props.confirm(this.state.person)
-        this.props.toggle()
+        this.props.confirm(this.state.item)
         this.props.toggleConfirm()
-
+        this.props.toggle()
+        
     }
 
     render() {
@@ -30,7 +31,7 @@ class Ask extends Component
             <div>
                 <Modal isOpen={true}>
                     <ModalBody>
-                        Êtes vous sûr de vouloir ajouter {this.state.person.firstName} {this.state.person.surname} ?
+                        {this.state.text}
                     </ModalBody>
                     <ModalFooter>
                         <Button onClick={this.confirm} color="dark">Confirmer</Button>

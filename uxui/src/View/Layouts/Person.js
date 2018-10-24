@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import {Button, Input, Form, Container, Card,
     CardBody, CardTitle, Col, Row, CardImg,
-    FormGroup, Label} from 'reactstrap'
+    FormGroup, Label, InputGroup, InputGroupAddon,
+    InputGroupText, UncontrolledTooltip} from 'reactstrap'
 import MaintenanceItem from '../Components/MaintenanceItem.js'
 import AttractionItem from '../Components/AttractionItem.js'
+import Ask from '../Components/Modals/Ask.js'
+import Confirm from '../Components/Modals/Confirm.js'
 import model from '../../Model/Personnel.js'
 import maintenanceModel from '../../Model/Maintenances.js'
 import attrationsModel from '../../Model/Attractions.js'
@@ -20,14 +23,19 @@ class Person extends Component
             maintenances: maintenanceModel.list('person', id),
             attractions: attrationsModel.list(),
             isUpdating: false,
-            newPerson: {
-                firstName: '',
-                surname: '',
-                age: 0,
-                fonction: '',
-                salary: 0
+            newPerson: model.get(id),
+            valid: {
+                firstName: true,
+                surname: true,
+                salary: true,
+                age: true,
+                fonction: true
             },
+            totalValid: true,
             isEditing: false,
+            askCancel: false,
+            askSubmit: false,
+            confirmSubmit: false,
             seeMaintenance: false
         }
     }
@@ -37,15 +45,9 @@ class Person extends Component
         model.delete(this.state.person.id)
     }
 
-    toggleUpdate = () => {
-        
-        this.setState({isUpdating: !this.state.isUpdating})
-        console.log(this.state.person)
-    }
-
     toggleEdit = () => {
 
-        this.setState({isEditing: !this.state.isEditing})
+        this.setState({isEditing: !this.state.isEditing, newPerson: this.state.person})
     }
 
     toggleMaintenance = () => {
@@ -53,42 +55,126 @@ class Person extends Component
         this.setState({seeMaintenance: !this.state.seeMaintenance})
     }
 
+    askCancelEdit = () => {
+
+        this.setState({askCancel: true})
+    }
+
+    confirmAskCancel = () => {
+
+        this.setState({askCancel: false, isEditing: false})
+    }
+    
+    cancelAskCancel = () => {
+
+        this.setState({askCancel: false})
+    }
+
+    askSubmit = () => {
+
+        this.setState({askSubmit: true})
+    }
+
+    cancelAskSubmit = () => {
+
+        this.setState({askSubmit: false})
+    }
+
+    toggleConfirmSubmit = () => {
+
+        this.setState({confirmSubmit: !this.state.confirmSubmit})
+    }
+
     submitUpdate = (event) => {
 
-        var obj = {
-                id: this.state.person.id,
-                firstName: this.state.newPerson.firstName,
-                surname: this.state.newPerson.surname,
-                age: this.state.newPerson.age,
-                fonction: this.state.newPerson.fonction,
-                salary: this.state.newPerson.salary
-            }
-
-        var e = model.update(obj)
-        console.log(e)
-        this.setState({person: model.get(this.state.person.id)})
-        event.preventDefault()
+        var e = model.update(this.state.newPerson)
+        this.setState({person: model.get(this.state.person.id), isEditing: false, askSubmit: false})
     }
 
     handleChange = (event) => {
 
-        this.state.newPerson[event.target.name] = event.target.value
-        this.forceUpdate()
+        var valid = {...this.state.valid}
+        var newPerson = {...this.state.newPerson}
+
+        valid[event.target.name] = this.verify(event.target.type, event.target.value)
+        newPerson[event.target.name] = event.target.value
+
+        this.setState({valid, newPerson}, () => {this.updateTotalValid()})
     }
 
-    displayForm = () => {
+    verify = (type, value) => {
 
-        if (this.state.isUpdating) {
+        var toReturn = false
+        switch(type) {
+
+            case 'text':
+                if (/^[a-zA-Z'àâéèêôùûçÀÂÉÈÔÙÛÇ\s-]+$/.test(value)) {
+                    toReturn = true
+                }
+                break
+
+            case 'number':
+                if (value > 0) {
+                    toReturn = true
+                }
+        }
+        return toReturn
+    }
+
+    updateTotalValid = () => {
+
+        var valid = {...this.state.valid}
+        var newPerson = {...this.state.newPerson}
+        var total = true
+
+        for (let [key, value] of Object.entries(valid)) {
+
+            if (value === false) {
+
+                total = false
+            }
+        }
+
+        for (let [key, value] of Object.entries(newPerson)) {
+
+            if (value === null) {
+
+                total = false
+            }
+        }
+
+        this.setState({totalValid: total})
+    }
+
+    renderAskCancel = () => {
+
+        if (this.state.askCancel) {
+
             return (
-                <Form>
-                    first name: <Input type="text" name="firstName" value={this.state.newPerson.firstName} onChange={this.handleChange} placeholder="new first name"/>
-                    surname: <Input type="text" name="surname" value={this.state.newPerson.surname} onChange={this.handleChange} placeholder="new surname"/>
-                    age: <Input type="number" name="age" value={this.state.newPerson.age} onChange={this.handleChange} placeholder="new age"/>
-                    fonction: <Input type="text" name="fonction" value={this.state.newPerson.fonction} onChange={this.handleChange} placeholder="new fonction"/>
-                    salary: <Input type="number" name="salary" value={this.state.newPerson.salary} onChange={this.handleChange} placeholder="new salary"/>
+                <Ask toggleAsk={this.cancelAskCancel} confirm={(blank) => {}} toggle={this.confirmAskCancel} toggleConfirm={() => {}}
+                    text="Êtes vous sûr de vouloir quitter la modification ?"/>
+            )
+        }
+    }
 
-                    <Button onClick={this.submitUpdate}>Submit</Button>
-                </Form>)
+    renderAskSubmit = () => {
+
+        if (this.state.askSubmit) {
+
+            return (
+                <Ask toggleAsk={this.cancelAskSubmit} confirm={(blank) => {}} toggle={this.submitUpdate} toggleConfirm={this.toggleConfirmSubmit}
+                    text="Appliquer les changements à ce profil ?"/>
+            )
+        }
+    }
+
+    renderConfirmSubmit = () => {
+
+        if (this.state.confirmSubmit) {
+
+            return (
+                <Confirm ok={this.toggleConfirmSubmit} item={null} text='Ce profil a bien été mis à jour.' />
+            )
         }
     }
 
@@ -141,28 +227,32 @@ class Person extends Component
 
     renderEditProfile = () => {
 
-        var person = this.state.person
+        var newPerson = this.state.newPerson
 
         return (
             <Container className="pt-5">
                 <Card body style={{'maxWidth': '75%'}} className="m-auto">
                     <Row>
                         <Col xs={12} sm={4} md={4}>
-                            <CardImg style={{'maxWidth': '150px', 'minWidth': '80px'}} alt="Photo de profil" src={require("../../img/"+ String(person.id % 8 + 1) +".png")} />
+                            <CardImg style={{'maxWidth': '150px', 'minWidth': '80px'}} alt="Photo de profil" src={require("../../img/"+ String(newPerson.id % 8 + 1) +".png")} />
                         </Col>
                         <Col xs={12} sm={7} md={7} className="text-center">
                             <Row form>
                                 <Col sm={6}>
-                                    <FormGroup>
-                                        <Label className="float-left">Prénom</Label>
-                                        <Input onChange={this.handleChange} type="text" name="firstName" placeholder={person.firstName} />
+                                    <FormGroup id="firstNameInput">
+                                        <Input invalid={!this.state.valid.firstName} onChange={this.handleChange} type="text" name="firstName" value={newPerson.firstName} />
                                     </FormGroup>
+                                    <UncontrolledTooltip placement="top" target="firstNameInput">
+                                        Entrez un prénom
+                                    </UncontrolledTooltip>
                                 </Col>
                                 <Col sm={6}>
-                                <FormGroup>
-                                    <Label className="float-left">Nom de famille</Label>
-                                    <Input onChange={this.handleChange} type="text" name="surname" placeholder={person.surname} />
-                                </FormGroup>
+                                    <FormGroup id="surnameInput">
+                                        <Input invalid={!this.state.valid.surname} onChange={this.handleChange} type="text" name="surname" value={newPerson.surname} />
+                                    </FormGroup>
+                                    <UncontrolledTooltip placement="top" target="surnameInput">
+                                        Entrez un nom de famille
+                                    </UncontrolledTooltip>
                                 </Col>
 
 
@@ -172,23 +262,49 @@ class Person extends Component
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi eros, gravida ut purus eu, egestas convallis libero. Phasellus fringilla nec nunc non ornare. Nulla sit amet posuere eros. Vestibulum id risus quis est lobortis vehicula. Nulla mattis leo vitae sagittis tristique. Maecenas arcu sapien, ullamcorper eu pretium sit amet, iaculis lobortis metus.
                             </div>
                         </Col>
-                        <Button onClick={this.toggleEdit} style={{'top': '10px', 'right': '10px', 'position': 'absolute', 'width' :'38px'}} color="danger">
+                        <Button onClick={this.askCancelEdit} style={{'top': '10px', 'right': '10px', 'position': 'absolute', 'width' :'38px'}} color="danger">
                             <FontAwesomeIcon icon="times"/>
                         </Button>
-                        <Button onClick={this.toggleEdit} style={{'top': '55px', 'right': '10px', 'position': 'absolute', 'width' :'38px'}} color="success">
+                        <Button disabled={!this.state.totalValid} onClick={this.askSubmit} style={{'top': '55px', 'right': '10px', 'position': 'absolute', 'width' :'38px'}} color="success">
                             <FontAwesomeIcon icon="check"/>
                         </Button>
+                        {this.renderAskCancel()}
+                        {this.renderAskSubmit()}
                     </Row>
                     <CardBody>
                         <Row className="text-center">
                             <Col xs={4}>
-                                <FontAwesomeIcon color="green" icon="money-check-alt" size="lg" /> {person.salary} €
+                                <InputGroup id="salaryInput">
+                                    <InputGroupAddon addonType="prepend">
+                                        <InputGroupText>€</InputGroupText>
+                                    </InputGroupAddon>
+                                    <Input invalid={!this.state.valid.salary} onChange={this.handleChange} type="number" name="salary" value={newPerson.salary} />
+                                </InputGroup>
+                                <UncontrolledTooltip placement="top" target="salaryInput">
+                                    Entrez un salaire mensuel
+                                </UncontrolledTooltip>
                             </Col>
                             <Col xs={4}>
-                                <FontAwesomeIcon icon="user" size="lg" /> {person.age} ans
+                                <InputGroup id="ageInput">
+                                    <Input invalid={!this.state.valid.age} className="text-right" onChange={this.handleChange} type="number" name="age" value={newPerson.age} />
+                                    <InputGroupAddon addonType="append">
+                                        <InputGroupText>ans</InputGroupText>
+                                    </InputGroupAddon>
+                                </InputGroup>
+                                <UncontrolledTooltip placement="top" target="ageInput">
+                                    Entrez un âge
+                                </UncontrolledTooltip>
                             </Col>
                             <Col xs={4}>
-                                <FontAwesomeIcon color="blue" icon="briefcase" size="lg" /> {person.fonction}
+                                <InputGroup id="fonctionInput">
+                                    <InputGroupAddon addonType="prepend">
+                                        <InputGroupText><FontAwesomeIcon icon="briefcase" /></InputGroupText>
+                                    </InputGroupAddon>
+                                    <Input invalid={!this.state.valid.fonction} onChange={this.handleChange} type="text" name="fonction" value={newPerson.fonction} />   
+                                </InputGroup>
+                                <UncontrolledTooltip placement="top" target="fonctionInput">
+                                    Entrez la fonction
+                                </UncontrolledTooltip>
                             </Col>
                         </Row>
                     </CardBody>
@@ -243,9 +359,8 @@ class Person extends Component
         return (
             <div>
                 {this.renderProfile()}
+                {this.renderConfirmSubmit()}
                 <Button onClick={this.fire}>vire moi ce mec</Button>
-                <Button onClick={this.toggleUpdate}>modifie moi ce mec</Button>
-                {this.displayForm()}
             </div>
         )
     }
