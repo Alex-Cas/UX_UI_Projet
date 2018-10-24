@@ -206,9 +206,9 @@ class Person extends Component
                 <div>
                     {maintenances.map((item, idx) => {
                         return (
-                            <div>
-                                <AttractionItem key={item.attraction_id} attraction={attractions[item.attraction_id]}/>
-                                <MaintenanceItem key={idx} maintenance={item}/>
+                            <div key={idx}>
+                                <AttractionItem attraction={attractions[item.attraction_id]}/>
+                                <MaintenanceItem maintenance={item}/>
                             </div>
                         )
                     })}

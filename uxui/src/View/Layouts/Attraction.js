@@ -29,8 +29,8 @@ class Attraction extends Component
                 Maintenances (ids): 
                 {maintenances.map( (item, idx) => {
                     return (
-                        <div>
-                            <MaintenanceItem key={idx} maintenance={item}/>
+                        <div key={idx}>
+                            <MaintenanceItem maintenance={item}/>
                             <PersonnelItem personnel={personnelModel.get(item.person_id)}/>
                         </div>
                 )
