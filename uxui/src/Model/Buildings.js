@@ -8,6 +8,14 @@ class Buildings
         return buildings
     }
 
+    static create(building) {
+
+        var toReturn = false
+        toReturn = StorageHelper.create('buildings', building)
+
+        return toReturn
+    }
+
     static get(id) {
         
         var building = StorageHelper.get('buildings', id)
