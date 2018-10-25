@@ -9,7 +9,7 @@ import Ask from '../Components/Modals/Ask.js'
 import Confirm from '../Components/Modals/Confirm.js'
 import model from '../../Model/Personnel.js'
 import maintenanceModel from '../../Model/Maintenances.js'
-import attrationsModel from '../../Model/Attractions.js'
+import attractionsModel from '../../Model/Attractions.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class Person extends Component
@@ -21,7 +21,7 @@ class Person extends Component
         this.state = {
             person: model.get(id),
             maintenances: maintenanceModel.list('person', id),
-            attractions: attrationsModel.list(),
+            attractions: attractionsModel.list(),
             isUpdating: false,
             newPerson: model.get(id),
             valid: {
@@ -209,7 +209,7 @@ class Person extends Component
                 <Card body style={{'maxWidth': '75%'}} className="m-auto">
                     <Row>
                         <Col xs={12} sm={4} md={4}>
-                            <CardImg style={{'maxWidth': '150px', 'minWidth': '80px'}} alt="Photo de profil" src={require("../../img/"+ String(person.id % 8 + 1) +".png")} />
+                            <CardImg style={{'maxWidth': '150px', 'minWidth': '80px'}} alt="Photo de profil" src={require("../../img/personnel/"+ String(person.id % 8 + 1) +".png")} />
                         </Col>
                         <Col xs={12} sm={7} md={7} className="text-center">
                             <CardTitle>{person.firstName} {person.surname}</CardTitle>
@@ -257,7 +257,7 @@ class Person extends Component
                 <Card body style={{'maxWidth': '75%'}} className="m-auto">
                     <Row>
                         <Col xs={12} sm={4} md={4}>
-                            <CardImg style={{'maxWidth': '150px', 'minWidth': '80px'}} alt="Photo de profil" src={require("../../img/"+ String(newPerson.id % 8 + 1) +".png")} />
+                            <CardImg style={{'maxWidth': '150px', 'minWidth': '80px'}} alt="Photo de profil" src={require("../../img/personnel/"+ String(newPerson.id % 8 + 1) +".png")} />
                         </Col>
                         <Col xs={12} sm={7} md={7} className="text-center">
                             <Row form>

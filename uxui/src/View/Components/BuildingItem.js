@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import {Col, Card, CardBody, CardText} from 'reactstrap'
+import {Col, Card, CardBody, CardText, CardImg, Row} from 'reactstrap'
 
 
 class BuildingItem extends Component
@@ -18,14 +18,23 @@ class BuildingItem extends Component
 
 
         return (
-            <Col xs={6} sm={6} md={4} lg={4} className="my-2" style={{'maxWidth': '14rem'}}>
+            <Col xs={11} sm={6} md={4} lg={4} className="my-2" style={{'maxWidth': '14rem'}}>
                 <Card>
-                    <CardBody tag={Link} to={"/buildings/" + building.id}>
-                        <CardText className="text-center">
-                            {building.name}<br/>
-                        </CardText>
-                    </CardBody>
-                    {building.date}<br/>
+                    <Row>
+                        <Col xs={12} sm={12} md={12} className="text-center">
+                            <CardBody tag={Link} to={"/buildings/" + building.id}>
+                                <CardText className="text-center">
+                                    {building.name}<br/>
+                                </CardText>
+                            </CardBody>
+                        </Col>
+                        <Col>
+                            <CardImg style={{'Width': '100%', 'minWidth': '80px'}} alt="Photo de profil" src={require("../../img/batiment/"+ String(building.id % 10 + 1) +".png")} />
+                        </Col>
+                        <Col xs={11} sm={11} md={11} className="text-center">
+                            {building.date}
+                        </Col>
+                    </Row>
                 </Card>
             </Col>
         )

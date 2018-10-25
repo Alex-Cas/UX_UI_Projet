@@ -8,6 +8,14 @@ class Attractions
         return attractions
     }
 
+    static create(attraction) {
+
+        var toReturn = false
+        toReturn = StorageHelper.create('attractions', attraction)
+
+        return toReturn
+    }
+
     static get(id) {
 
         var attraction = StorageHelper.get('attractions', id)
