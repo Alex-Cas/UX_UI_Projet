@@ -35,6 +35,7 @@ class Person extends Component
             isEditing: false,
             askCancel: false,
             askSubmit: false,
+            askDelete: false,
             confirmSubmit: false,
             seeMaintenance: false
         }
@@ -64,15 +65,27 @@ class Person extends Component
 
         this.setState({askCancel: false, isEditing: false})
     }
+
+    confirmAskDelete = () => {
+
+        this.fire()
+        this.setState({askDelete: false, isEditing: false})
+    }
     
     cancelAskCancel = () => {
 
         this.setState({askCancel: false})
     }
+    cancelAskDelete = () => {
+        this.setState({askDelete: false})
+    }
 
     askSubmit = () => {
 
         this.setState({askSubmit: true})
+    }
+    askDelete = () => {
+        this.setState({askDelete: true})
     }
 
     cancelAskSubmit = () => {
@@ -164,6 +177,16 @@ class Person extends Component
             return (
                 <Ask toggleAsk={this.cancelAskSubmit} confirm={(blank) => {}} toggle={this.submitUpdate} toggleConfirm={this.toggleConfirmSubmit}
                     text="Appliquer les changements à ce profil ?"/>
+            )
+        }
+    }
+
+    renderAskDelete = () => {
+        if (this.state.askDelete) {
+
+            return (
+                <Ask toggleAsk={this.cancelAskDelete} confirm={(blank) => {}} toggle={this.confirmAskDelete} toggleConfirm={this.toggleConfirmSubmit}
+                     text="Etes-vous sur de vouloir supprimer ce profil ?"/>
             )
         }
     }
@@ -270,6 +293,7 @@ class Person extends Component
                         </Button>
                         {this.renderAskCancel()}
                         {this.renderAskSubmit()}
+                        {this.renderAskDelete()}
                     </Row>
                     <CardBody>
                         <Row className="text-center">
@@ -308,6 +332,11 @@ class Person extends Component
                             </Col>
                         </Row>
                     </CardBody>
+                    <Row className="text-center">
+                        <Col xs={12}>
+                            <Button onClick={this.askDelete} color="danger">Supprimer profil</Button>
+                        </Col>
+                    </Row>
                 </Card>
             </Container>
         )
@@ -360,7 +389,6 @@ class Person extends Component
             <div>
                 {this.renderProfile()}
                 {this.renderConfirmSubmit()}
-                <Button onClick={this.fire}>vire moi ce mec</Button>
             </div>
         )
     }
