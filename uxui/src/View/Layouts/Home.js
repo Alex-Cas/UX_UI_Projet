@@ -14,8 +14,11 @@ class Home extends Component
             <Container>
                 <Row>
                     <Col>
-                        <div>
+                        <div className={"title"}>
                             AuliLand Experience
+                        </div>
+                        <div>
+                            <CardImg style={{'height': '70vh', 'width': '170vh'}}  alt="Photo d'attraction" src={require("../../img/"+ "1" +".jpg")} />
                         </div>
                     </Col>
                 </Row>
