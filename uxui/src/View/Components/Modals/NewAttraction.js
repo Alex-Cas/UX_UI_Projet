@@ -100,23 +100,39 @@ class NewAttraction extends Component
         this.setState({totalValid: total})
     }
 
+    displayError = (text) => {
+
+        return (
+            <small className="row text-danger m-auto">{text}</small>
+        )
+    }
+
     renderForm = () => {
 
         return (
             <Form>
                 <FormGroup>
                     <Label>Nom <span className="text-danger">*</span></Label>
-                    <Input invalid={this.state.valid.name ? false : true} onChange={this.handleChange} type="text" name="name" placeholder="Entrez le nom" />
+                    { !this.state.valid.name 
+                        ? this.displayError("Les caractères spéciaux (_ , + * $ ...) ou chiffres ne sont pas autorisés.")
+                        : '' }
+                    <Input invalid={!this.state.valid.name} onChange={this.handleChange} type="text" name="name" placeholder="Entrez le nom" />
                 </FormGroup>
                 <FormGroup>
                     <Label>Date <span className="text-danger">*</span></Label>
-                    <Input invalid={this.state.valid.date ? false : true} onChange={this.handleChange} type="date" name="date" placeholder="Entrez la date"/>
+                    { !this.state.valid.date 
+                        ? this.displayError("La date ne semble pas être valide...")
+                        : '' }
+                    <Input invalid={!this.state.valid.date} onChange={this.handleChange} type="date" name="date" placeholder="Entrez la date"/>
                 </FormGroup>
                 <FormGroup>
                     <Label>Prix <span className="text-danger">*</span></Label>
-                    <Input invalid={this.state.valid.price ? false : true} onChange={this.handleChange} type="number" name="price" placeholder="Entrez le prix"/>
+                    { !this.state.valid.price 
+                        ? this.displayError("Le prix ne peut pas être inférieur ou égal à 0.")
+                        : '' }
+                    <Input invalid={!this.state.valid.price} onChange={this.handleChange} type="number" name="price" placeholder="Entrez le prix"/>
                 </FormGroup>
-                <small className="text-danger">* Champs obligatoires</small>
+                <small className="text-danger float-right">* Champs obligatoires</small>
             </Form>
         )
     }
@@ -125,7 +141,7 @@ class NewAttraction extends Component
         return (
             <div>
                 <div id="confirmButton">
-                    <Button disabled={this.state.totalValid ? false: true} onClick={this.toggleAsk} color="dark">Ajouter</Button>
+                    <Button disabled={!this.state.totalValid} onClick={this.toggleAsk} color="dark">Ajouter</Button>
                 </div>
                 <Tooltip placement="top" target="confirmButton" toggle={this.toggleTooltip} isOpen={!this.state.totalValid && this.state.tooltipOpen}>
                     <small>Veuillez remplir tous les champs.</small>

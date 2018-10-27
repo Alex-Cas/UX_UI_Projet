@@ -57,7 +57,7 @@ class NewBuilding extends Component
         switch(type) {
 
             case 'text':
-                if (/^[a-zA-Z'àâéèêôùûçÀÂÉÈÔÙÛÇ\s-]+$/.test(value)) {
+                if (/^[a-zA-z0-9-Z'àâéèêôùûçÀÂÉÈÔÙÛÇ\s]+$/.test(value)) {
                     toReturn = true
                 }
                 break
@@ -100,19 +100,32 @@ class NewBuilding extends Component
         this.setState({totalValid: total})
     }
 
+    displayError = (text) => {
+
+        return (
+            <small className="row text-danger m-auto">{text}</small>
+        )
+    }
+
     renderForm = () => {
 
         return (
             <Form>
                 <FormGroup>
                     <Label>Nom <span className="text-danger">*</span></Label>
-                    <Input invalid={this.state.valid.name ? false : true} onChange={this.handleChange} type="text" name="name" placeholder="Entrez le nom" />
+                    { !this.state.valid.name 
+                        ? this.displayError("Les caractères spéciaux (_ , + * $ ...) ne sont pas autorisés.")
+                        : '' }
+                    <Input invalid={!this.state.valid.name} onChange={this.handleChange} type="text" name="name" placeholder="Entrez le nom" />
                 </FormGroup>
                 <FormGroup>
                     <Label>Date <span className="text-danger">*</span></Label>
-                    <Input invalid={this.state.valid.date ? false : true} onChange={this.handleChange} type="date" name="date" placeholder="Choisir une date"/>
+                    { !this.state.valid.date 
+                        ? this.displayError("La date ne semble pas être valide...")
+                        : '' }
+                    <Input invalid={!this.state.valid.date} onChange={this.handleChange} type="date" name="date" placeholder="Choisir une date"/>
                 </FormGroup>
-                <small className="text-danger">* Champs obligatoires</small>
+                <small className="text-danger float-right">* Champs obligatoires</small>
             </Form>
         )
     }
@@ -121,7 +134,7 @@ class NewBuilding extends Component
         return (
             <div>
                 <div id="confirmButton">
-                    <Button disabled={this.state.totalValid ? false: true} onClick={this.toggleAsk} color="dark">Ajouter</Button>
+                    <Button disabled={!this.state.totalValid} onClick={this.toggleAsk} color="dark">Ajouter</Button>
                 </div>
                 <Tooltip placement="top" target="confirmButton" toggle={this.toggleTooltip} isOpen={!this.state.totalValid && this.state.tooltipOpen}>
                     <small>Veuillez remplir tous les champs.</small>

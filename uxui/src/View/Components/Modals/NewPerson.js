@@ -99,36 +99,58 @@ class NewPerson extends Component
         this.setState({totalValid: total})
     }
 
+    displayError = (text) => {
+
+        return (
+            <small className="row text-danger m-auto">{text}</small>
+        )
+    }
+
     renderForm = () => {
 
         return (
             <Form>
                 <FormGroup>
                     <Label>Prénom <span className="text-danger">*</span></Label>
-                    <Input invalid={this.state.valid.firstName ? false : true} onChange={this.handleChange} type="text" name="firstName" placeholder="Entrez le prénom" />
+                    { !this.state.valid.firstName 
+                        ? this.displayError("Les caractères spéciaux (_ , + * $ ...) ou chiffres ne sont pas autorisés.")
+                        : '' }
+                    <Input invalid={!this.state.valid.firstName} onChange={this.handleChange} type="text" name="firstName" placeholder="Entrez le prénom" />
                 </FormGroup>
                 <FormGroup>
                     <Label>Nom de famille <span className="text-danger">*</span></Label>
-                    <Input invalid={this.state.valid.surname ? false : true} onChange={this.handleChange} type="text" name="surname" placeholder="Entrez le nom de famille"/>
+                    { !this.state.valid.surname 
+                        ? this.displayError("Les caractères spéciaux (_ , + * $ ...) ou chiffres ne sont pas autorisés.")
+                        : '' }
+                    <Input invalid={!this.state.valid.surname} onChange={this.handleChange} type="text" name="surname" placeholder="Entrez le nom de famille"/>
                 </FormGroup>
                 <FormGroup>
                     <Label>Âge <span className="text-danger">*</span></Label>
-                    <Input invalid={this.state.valid.age ? false : true} onChange={this.handleChange} type="number" name="age" placeholder="Entrez l'âge"/>
+                    { !this.state.valid.age 
+                        ? this.displayError("L'âge ne peut pas être négatif.")
+                        : '' }
+                    <Input invalid={!this.state.valid.age} onChange={this.handleChange} type="number" name="age" placeholder="Entrez l'âge"/>
                 </FormGroup>
                 <FormGroup>
                     <Label>Salaire <span className="text-danger">*</span></Label>
+                    { !this.state.valid.salary 
+                        ? this.displayError("Le salaire ne peut pas être négatif.")
+                        : '' }
                     <InputGroup>
                         <InputGroupAddon addonType="prepend">
                             <InputGroupText>€</InputGroupText>
                         </InputGroupAddon>
-                        <Input invalid={this.state.valid.salary ? false : true} onChange={this.handleChange} type="number" name="salary" placeholder="Entrez le salaire" />
+                        <Input invalid={!this.state.valid.salary} onChange={this.handleChange} type="number" name="salary" placeholder="Entrez le salaire" />
                     </InputGroup>
                 </FormGroup>
                 <FormGroup>
                     <Label>Fonction <span className="text-danger">*</span></Label>
-                    <Input invalid={this.state.valid.fonction ? false : true} onChange={this.handleChange} type="text" name="fonction" placeholder="Entrez la fonction"/>
+                    { !this.state.valid.fonction 
+                        ? this.displayError("Les caractères spéciaux (_ , + * $ ...) ou chiffres ne sont pas autorisés.")
+                        : '' }
+                    <Input invalid={!this.state.valid.fonction} onChange={this.handleChange} type="text" name="fonction" placeholder="Entrez la fonction"/>
                 </FormGroup>
-                <small className="text-danger">* Champs obligatoires</small>
+                <small className="text-danger float-right">* Champs obligatoires</small>
             </Form>
         )
     }
@@ -137,7 +159,7 @@ class NewPerson extends Component
         return (
             <div>
                 <div id="confirmButton">
-                    <Button disabled={this.state.totalValid ? false: true} onClick={this.toggleAsk} color="dark">Ajouter</Button>
+                    <Button disabled={!this.state.totalValid} onClick={this.toggleAsk} color="dark">Ajouter</Button>
                 </div>
                 <Tooltip placement="top" target="confirmButton" toggle={this.toggleTooltip} isOpen={!this.state.totalValid && this.state.tooltipOpen}>
                     <small>Veuillez remplir tous les champs.</small>
