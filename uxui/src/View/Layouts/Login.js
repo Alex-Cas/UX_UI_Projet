@@ -11,7 +11,7 @@ class Login extends Component
 
     render() {
         return (
-            <Container className="mt-5">
+            <Container className="pt-5">
                 <Card>
                     <CardBody>
                         <CardTitle>Log in</CardTitle>
