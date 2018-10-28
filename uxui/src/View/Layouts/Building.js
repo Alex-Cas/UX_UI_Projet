@@ -15,19 +15,33 @@ class Building extends Component
 
     render() {
         var building = this.state.building
+        building.date = new Date(building.date.split("T")[0]).toISOString().split("T")[0]
+
+
 
         return (
             <Container className="pt-5">
                 <Card body style={{'maxWidth': '75%'}} className="m-auto">
                     <Row>
-                        <Col>
+                        <Col xs={12} md={6} className="text-left">
                             <div style={{fontSize: '60px'}}>{building.name}</div>
                         </Col>
-                        <Col>
-                            {building.date}
+                        <Col xs={12} md={6}>
+                            <div style={{fontSize: '20px'}} >Date de jsais pas quoi: {building.date}</div>
                         </Col>
-                        <Col>
-                            <CardImg style={{width: '50vh', height: '50vh'}} alt="Photo de profil" src={require("../../img/batiment/"+ String(building.id % 10 + 1) +".png")} />
+                    </Row>
+                    <Row>
+                        <Col xs={12} md={6} className="text-left">
+                            <div>
+                                Toute petite description. Toute petite description. Toute petite description. Toute petite description.
+                                Toute petite description. Toute petite description. Toute petite description. Toute petite description.
+                                Toute petite description. Toute petite description. Toute petite description. Toute petite description.
+
+                            </div>
+                        </Col>
+
+                        <Col xs={12} md={6} className="text-right">
+                            <CardImg style={{width: '45vh', height: '45vh'}} alt="Photo de profil" src={require("../../img/batiment/"+ String(building.id % 10 + 1) +".png")} />
                         </Col>
                     </Row>
                 </Card>

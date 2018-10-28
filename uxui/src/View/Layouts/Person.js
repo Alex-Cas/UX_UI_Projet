@@ -353,7 +353,7 @@ class Person extends Component
                 <Row>
                     {maintenances.map((item, idx) => {
                         return (
-                            <Col xs={6} key={idx} className="my-3">
+                            <Col xs={12} md={6} key={idx} className="my-3">
                                 <Card className="py-3">
                                     <MaintenanceItem maintenance={item}/>
                                     <div className="justify-content-center">

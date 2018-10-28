@@ -1,8 +1,10 @@
-import {Col, Card, CardBody, CardText, CardImg, Container, Row, Button} from 'reactstrap'
+import {Col, Card, CardBody, CardText, CardImg, Container, Row, Button, Collapse} from 'reactstrap'
 import React, { Component } from 'react'
 import MaintenanceItem from '../Components/MaintenanceItem.js'
 import model from '../../Model/Attractions.js'
 import maintenanceModel from '../../Model/Maintenances.js'
+import AttractionItem from '../Components/AttractionItem.js'
+
 import personnelModel from "../../Model/Personnel";
 import PersonnelItem from '../Components/PersonnelItem.js'
 
@@ -15,13 +17,40 @@ class Attraction extends Component
         var id = parseInt(props.match.params.attractionId)
         this.state = {
             attraction: model.get(id),
-            maintenances: maintenanceModel.list('attraction', id)
+            maintenances: maintenanceModel.list('attraction', id),
+            seeMaintenance : false
         }
     }
+    toggleMaintenance = () => {
+
+        this.setState({seeMaintenance: !this.state.seeMaintenance})
+    }
+
+    renderProfileMaintenance = () => {
+        var maintenances = this.state.maintenances
+        return (
+            <Row>
+                {maintenances.map((item, idx) => {
+                    return (
+                        <Col xs={12} md={6} lg={4} key={idx} className="my-3">
+                            <Card className="p-3">
+                                <MaintenanceItem maintenance={item}/>
+                                <div className="justify-content-center">
+                                    <PersonnelItem personnel={personnelModel.get(item.person_id)}/>
+                                </div>
+                            </Card>
+                        </Col>
+                    )
+                 })}
+            </Row>
+        )
+    }
+
+
 
     render() {
         var attraction = this.state.attraction
-        var maintenances = this.state.maintenances
+        attraction.date = new Date(attraction.date.split("T")[0]).toISOString().split("T")[0]
 
         return (
             <Container className="pt-5">
@@ -36,27 +65,20 @@ class Attraction extends Component
                     </Row>
                     <Row>
                         <Col>
-                            {attraction.date}
+                            Date de jsais pas quoi: {attraction.date}
                         </Col>
-                        <Row className="text-center">
-                            <Col xs={12}>
-                                <Button onClick={this.toggleMaintenance}>
-                                    Maintenance
-                                </Button>
-                            </Col>
-                            <Row>
-                                {maintenances.map( (item, idx) => {
-                                    return (
-                                        <Col>
-                                            <div key={idx}>
-                                                <MaintenanceItem maintenance={item}/>
-                                                <PersonnelItem personnel={personnelModel.get(item.person_id)}/>
-                                            </div>
-                                        </Col>
-                                    )
-                                })}
-                            </Row>
-                        </Row>
+                    </Row>
+                    <Row className="text-center">
+                        <Col xs={12}>
+                            <Button onClick={this.toggleMaintenance}>
+                                Maintenance
+                            </Button>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Collapse isOpen={this.state.seeMaintenance}>
+                            {this.renderProfileMaintenance()}
+                        </Collapse>
                     </Row>
                 </Card>
             </Container>
