@@ -31,9 +31,6 @@ class BuildingItem extends Component
                         <Col>
                             <CardImg style={{'Width': '100%', 'minWidth': '80px'}} alt="Photo de profil" src={require("../../img/batiment/"+ String(building.id % 10 + 1) +".png")} />
                         </Col>
-                        <Col xs={11} sm={11} md={11} className="text-center">
-                            {building.date}
-                        </Col>
                     </Row>
                 </Card>
             </Col>

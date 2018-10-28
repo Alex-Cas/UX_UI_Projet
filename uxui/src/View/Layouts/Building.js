@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import model from '../../Model/Buildings.js'
-import {Col, Card, CardBody, CardText, CardImg, Row} from 'reactstrap'
+import {Container, Row, Col, CardImg, Card, CardTitle, CardBody, CardHeader} from 'reactstrap'
 
 class Building extends Component
 {
@@ -17,17 +17,21 @@ class Building extends Component
         var building = this.state.building
 
         return (
-            <div>
-                <Col>
-                    {building.name}
-                </Col>
-                <Col>
-                    {building.date}
-                </Col>
-                <Col>
-                    <CardImg style={{'Width': '80px%', 'minWidth': '80px'}} alt="Photo de profil" src={require("../../img/batiment/"+ String(building.id % 10 + 1) +".png")} />
-                </Col>
-            </div>
+            <Container className="pt-5">
+                <Card body style={{'maxWidth': '75%'}} className="m-auto">
+                    <Row>
+                        <Col>
+                            <div style={{fontSize: '60px'}}>{building.name}</div>
+                        </Col>
+                        <Col>
+                            {building.date}
+                        </Col>
+                        <Col>
+                            <CardImg style={{width: '50vh', height: '50vh'}} alt="Photo de profil" src={require("../../img/batiment/"+ String(building.id % 10 + 1) +".png")} />
+                        </Col>
+                    </Row>
+                </Card>
+            </Container>
 
         )
     }
