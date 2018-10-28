@@ -1,4 +1,4 @@
-import {Col, Card, CardBody, CardText, CardImg} from 'reactstrap'
+import {Col, Card, CardBody, CardText, CardImg, Container, Row, Button} from 'reactstrap'
 import React, { Component } from 'react'
 import MaintenanceItem from '../Components/MaintenanceItem.js'
 import model from '../../Model/Attractions.js'
@@ -24,20 +24,42 @@ class Attraction extends Component
         var maintenances = this.state.maintenances
 
         return (
-            <div>
-                {attraction.name}<br/>
-                <CardImg style={{'height': '25%', width: "25%"}} alt="Photo d'attraction" src={require("../../img/attraction/"+ String(attraction.id % 7 + 1) +".png")} />
-                {attraction.date}<br/>
-                Maintenances (ids): 
-                {maintenances.map( (item, idx) => {
-                    return (
-                        <div key={idx}>
-                            <MaintenanceItem maintenance={item}/>
-                            <PersonnelItem personnel={personnelModel.get(item.person_id)}/>
-                        </div>
-                )
-                })}
-            </div>
+            <Container className="pt-5">
+                <Card body style={{'maxWidth': '75%'}} className="m-auto">
+                    <Row>
+                        <Col>
+                            <div style={{fontSize: '60px'}}>{attraction.name}</div>
+                        </Col>
+                        <Col>
+                            <CardImg style={{height: '50vh', width: "50vh"}} alt="Photo d'attraction" src={require("../../img/attraction/"+ String(attraction.id % 7 + 1) +".png")} />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            {attraction.date}
+                        </Col>
+                        <Row className="text-center">
+                            <Col xs={12}>
+                                <Button onClick={this.toggleMaintenance}>
+                                    Maintenance
+                                </Button>
+                            </Col>
+                            <Row>
+                                {maintenances.map( (item, idx) => {
+                                    return (
+                                        <Col>
+                                            <div key={idx}>
+                                                <MaintenanceItem maintenance={item}/>
+                                                <PersonnelItem personnel={personnelModel.get(item.person_id)}/>
+                                            </div>
+                                        </Col>
+                                    )
+                                })}
+                            </Row>
+                        </Row>
+                    </Row>
+                </Card>
+            </Container>
         )
     }
 }
