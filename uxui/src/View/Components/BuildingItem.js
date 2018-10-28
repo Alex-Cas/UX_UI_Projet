@@ -18,22 +18,18 @@ class BuildingItem extends Component
 
 
         return (
-            <Col xs={11} sm={6} md={4} lg={4} className="my-2" style={{'maxWidth': '14rem'}}>
-                <Card>
-                    <Row>
-                        <Col xs={12} sm={12} md={12} className="text-center">
-                            <CardBody tag={Link} to={"/buildings/" + building.id}>
-                                <CardText className="text-center">
-                                    {building.name}<br/>
-                                </CardText>
-                            </CardBody>
-                        </Col>
-                        <Col>
-                            <CardImg style={{'Width': '100%', 'minWidth': '80px'}} alt="Photo de profil" src={require("../../img/batiment/"+ String(building.id % 10 + 1) +".png")} />
-                        </Col>
-                    </Row>
-                </Card>
-            </Col>
+            <div>
+                <Col xs={6} sm={6} md={4} lg={4} className="my-2" style={{'maxWidth': '14rem'}}>
+                    <Card tag={Link} to={"/buildings/" + building.id}>
+                        <CardImg style={{'height': '175px'}} width="100%" alt="Photo de batiment" src={require("../../img/batiment/"+ String(building.id % 10 + 1) +".png")} />
+                        <CardBody>
+                            <CardText className="text-center">
+                                {building.name}<br/>
+                            </CardText>
+                        </CardBody>
+                    </Card>
+                </Col>
+            </div>
         )
     }
 }

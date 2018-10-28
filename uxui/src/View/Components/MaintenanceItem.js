@@ -22,9 +22,9 @@ class MaintenanceItem extends Component
 
 
         return (
-            <div>
-                <h5><CardTitle tag={Link} to={"/maintenances/" + maintenance.id} className="ml-3">Maintenance du {date}</CardTitle></h5>
-                <div>Texte tout a fait bidon. Texte tout a fait bidon Texte tout a fait bidon. Texte tout a fait bidon </div>
+            <div className="ml-3">
+                <h5><CardTitle tag={Link} to={"/maintenances/" + maintenance.id} >Maintenance du {date}</CardTitle></h5>
+                <div>Vérification des capteurs et divers tests</div>
             </div>
         )
     }

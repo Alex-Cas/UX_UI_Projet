@@ -65,13 +65,13 @@ class Attraction extends Component
                     </Row>
                     <Row>
                         <Col>
-                            Date de jsais pas quoi: {attraction.date}
+                            Date d'installation: {attraction.date}
                         </Col>
                     </Row>
                     <Row className="text-center">
                         <Col xs={12}>
-                            <Button onClick={this.toggleMaintenance}>
-                                Maintenance
+                            <Button color="info" block onClick={this.toggleMaintenance}>
+                                Maintenances
                             </Button>
                         </Col>
                     </Row>

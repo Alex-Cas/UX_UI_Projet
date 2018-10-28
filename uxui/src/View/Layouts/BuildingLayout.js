@@ -66,7 +66,7 @@ class BuildingLayout extends Component
                 <Row className="justify-content-center">
                     <Card>
                         <CardHeader tag="h4" className="bg-secondary text-white">
-                            <div className="float-left align-middle">Batiments du Parc</div>
+                            <div className="float-left align-middle">BATIMENTS DU PARC</div>
                             <div className="float-right">
                                 <Button onClick={this.toggleAdd} color="success"><FontAwesomeIcon icon="plus" />&nbsp; Ajouter un Batiment</Button>
                                 {this.displayAdd()}

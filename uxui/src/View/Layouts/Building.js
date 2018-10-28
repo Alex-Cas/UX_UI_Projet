@@ -27,16 +27,14 @@ class Building extends Component
                             <div style={{fontSize: '60px'}}>{building.name}</div>
                         </Col>
                         <Col xs={12} md={6}>
-                            <div style={{fontSize: '20px'}} >Date de jsais pas quoi: {building.date}</div>
+                            <div style={{fontSize: '20px'}} >Date d'installation: {building.date}</div>
                         </Col>
                     </Row>
                     <Row>
                         <Col xs={12} md={6} className="text-left">
                             <div>
-                                Toute petite description. Toute petite description. Toute petite description. Toute petite description.
-                                Toute petite description. Toute petite description. Toute petite description. Toute petite description.
-                                Toute petite description. Toute petite description. Toute petite description. Toute petite description.
-
+                                Historique: <br />
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ornare imperdiet magna pulvinar efficitur. Nulla cursus nisi vel lorem convallis, vitae bibendum orci porttitor. Pellentesque eget ex semper, posuere tellus at, sodales mi. Nullam efficitur mattis augue ut iaculis. Donec consequat metus id facilisis dictum. Aenean fermentum hendrerit neque sit amet varius.
                             </div>
                         </Col>
 

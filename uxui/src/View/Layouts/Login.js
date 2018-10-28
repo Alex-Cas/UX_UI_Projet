@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import {Form, Container, Label, Input,
-    Card, CardTitle, CardBody} from 'reactstrap'
+import {Form, FormGroup, Container, Label, Input,
+    Card, CardTitle, CardBody, Button} from 'reactstrap'
 
 class Login extends Component
 {
@@ -16,12 +16,20 @@ class Login extends Component
                     <CardBody>
                         <CardTitle>Log in</CardTitle>
                         <Form>
-                            <Label for="emailInput">Email address</Label>
-                            <Input type="email" name="email" id="emailInput" aria-describedby="emailHelp" placeholder="Enter email" />
-                            <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                            <FormGroup>
+                                <Label for="emailInput">Email address</Label>
+                                <Input type="email" name="email" id="emailInput" aria-describedby="emailHelp" placeholder="Enter email" />
+                                <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="passwordInput">Password</Label>
+                                <Input type="password" name="password" id="passwordInput" placeholder="Enter password" />
+                            </FormGroup>
                             
-                            <Label for="passwordInput">Password</Label>
-                            <Input type="password" name="password" id="passwordInput" placeholder="Enter password" />
+                            <FormGroup>
+                                <Button color="dark">Se connecter</Button>{"  "}
+                                <a href="/"><small>Mot de passe oublié ?</small></a>
+                            </FormGroup>
                         </Form>
                     </CardBody>
                 </Card>
