@@ -17,7 +17,7 @@ class MainLayout extends Component
                 <div className="main">
                     <Navbar color="dark" dark expand={true}>
                         <NavbarBrand tag={Link} to="/">
-                            HOME
+                            AuliLand
                         </NavbarBrand>
                         <Nav className="mr-auto" navbar>
                             <NavLink tag={Link} to="/buildings">
@@ -32,7 +32,7 @@ class MainLayout extends Component
                         </Nav>
                         <Nav navbar>
                             <NavLink tag={Link} to="/login">
-                                Login
+                                Connexion
                             </NavLink>
                         </Nav>
                     </Navbar>

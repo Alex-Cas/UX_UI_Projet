@@ -14,16 +14,16 @@ class Login extends Component
             <Container className="pt-5">
                 <Card>
                     <CardBody>
-                        <CardTitle>Log in</CardTitle>
+                        <CardTitle>Connexion</CardTitle>
                         <Form>
                             <FormGroup>
-                                <Label for="emailInput">Email address</Label>
-                                <Input type="email" name="email" id="emailInput" aria-describedby="emailHelp" placeholder="Enter email" />
-                                <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                                <Label for="emailInput">Adresse Mail</Label>
+                                <Input type="email" name="email" id="emailInput" aria-describedby="emailHelp" placeholder="Entrez votre adresse mail" />
+                                <small id="emailHelp" className="form-text text-muted">On ne partagera jamais votre adresse à un tiers.</small>
                             </FormGroup>
                             <FormGroup>
-                                <Label for="passwordInput">Password</Label>
-                                <Input type="password" name="password" id="passwordInput" placeholder="Enter password" />
+                                <Label for="passwordInput">Mot de passe</Label>
+                                <Input type="password" name="password" id="passwordInput" placeholder="Entrez votre mot de passe" />
                             </FormGroup>
                             
                             <FormGroup>
