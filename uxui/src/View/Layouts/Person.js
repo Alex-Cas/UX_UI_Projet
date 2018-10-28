@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {Button, Input, Form, Container, Card,
     CardBody, CardTitle, Col, Row, CardImg,
     FormGroup, Label, InputGroup, InputGroupAddon,
-    InputGroupText, UncontrolledTooltip} from 'reactstrap'
+    InputGroupText, UncontrolledTooltip, Collapse} from 'reactstrap'
 import MaintenanceItem from '../Components/MaintenanceItem.js'
 import AttractionItem from '../Components/AttractionItem.js'
 import Ask from '../Components/Modals/Ask.js'
@@ -237,12 +237,14 @@ class Person extends Component
                     </CardBody>
                     <Row className="text-center">
                         <Col xs={12}>
-                            <Button onClick={this.toggleMaintenance}>
-                                Maintenance
+                            <Button color="info" block onClick={this.toggleMaintenance}>
+                                Maintenances
                             </Button>
                         </Col>
-                        {this.renderProfileMaintenance()}
                     </Row>
+                    <Collapse isOpen={this.state.seeMaintenance}>
+                        {this.renderProfileMaintenance()}
+                    </Collapse>
                 </Card>
             </Container>
         )
@@ -345,21 +347,25 @@ class Person extends Component
         var maintenances = this.state.maintenances
         var attractions = this.state.attractions
 
-        if(this.state.seeMaintenance)
-        {
+        //if(this.state.seeMaintenance)
+        //{
             return (
-                <div>
+                <Row>
                     {maintenances.map((item, idx) => {
                         return (
-                            <div key={idx}>
-                                <AttractionItem attraction={attractions[item.attraction_id]}/>
-                                <MaintenanceItem maintenance={item}/>
-                            </div>
+                            <Col xs={6} key={idx} className="my-3">
+                                <Card className="py-3">
+                                    <MaintenanceItem maintenance={item}/>
+                                    <div className="justify-content-center">
+                                        <AttractionItem attraction={attractions[item.attraction_id]}/>
+                                    </div>
+                                </Card>
+                            </Col>
                         )
                     })}
-                </div>
+                </Row>
             )
-        }
+        //}
     }
 
     renderProfile = () => {
