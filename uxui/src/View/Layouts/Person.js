@@ -3,6 +3,7 @@ import {Button, Input, Form, Container, Card,
     CardBody, CardTitle, Col, Row, CardImg,
     FormGroup, Label, InputGroup, InputGroupAddon,
     InputGroupText, UncontrolledTooltip, Collapse} from 'reactstrap'
+import { Redirect } from 'react-router'
 import MaintenanceItem from '../Components/MaintenanceItem.js'
 import AttractionItem from '../Components/AttractionItem.js'
 import Ask from '../Components/Modals/Ask.js'
@@ -37,6 +38,8 @@ class Person extends Component
             askSubmit: false,
             askDelete: false,
             confirmSubmit: false,
+            confirmDelete: false,
+            redirect: false,
             seeMaintenance: false
         }
     }
@@ -96,6 +99,11 @@ class Person extends Component
     toggleConfirmSubmit = () => {
 
         this.setState({confirmSubmit: !this.state.confirmSubmit})
+    }
+
+    toggleConfirmDelete = () => {
+
+        this.setState({confirmDelete: !this.state.confirmDelete})
     }
 
     submitUpdate = (event) => {
@@ -159,6 +167,21 @@ class Person extends Component
         this.setState({totalValid: total})
     }
 
+    redirect = () => {
+
+        this.setState({redirect: true})
+    }
+
+    renderRedirect = () => {
+
+        if (this.state.redirect) {
+
+            return (
+                <Redirect to="/personnel" />
+            )
+        }
+    }
+
     renderAskCancel = () => {
 
         if (this.state.askCancel) {
@@ -185,7 +208,7 @@ class Person extends Component
         if (this.state.askDelete) {
 
             return (
-                <Ask toggleAsk={this.cancelAskDelete} confirm={(blank) => {}} toggle={this.confirmAskDelete} toggleConfirm={this.toggleConfirmSubmit}
+                <Ask toggleAsk={this.cancelAskDelete} confirm={(blank) => {}} toggle={this.confirmAskDelete} toggleConfirm={this.toggleConfirmDelete}
                      text="Etes-vous sur de vouloir supprimer ce profil ?"/>
             )
         }
@@ -197,6 +220,16 @@ class Person extends Component
 
             return (
                 <Confirm ok={this.toggleConfirmSubmit} item={null} text='Ce profil a bien été mis à jour.' />
+            )
+        }
+    }
+
+    renderConfirmDelete = () => {
+
+        if (this.state.confirmDelete) {
+
+            return (
+                <Confirm ok={this.redirect} item={null} text='Ce profil a bien été supprimé.' />
             )
         }
     }
@@ -336,7 +369,9 @@ class Person extends Component
                     </CardBody>
                     <Row className="text-center">
                         <Col xs={12}>
-                            <Button onClick={this.askDelete} color="danger">Supprimer profil</Button>
+                            <Button onClick={this.askDelete} color="warning">
+                                <FontAwesomeIcon icon="trash-alt"/> Supprimer profil
+                            </Button>
                         </Col>
                     </Row>
                 </Card>
@@ -395,6 +430,8 @@ class Person extends Component
             <div>
                 {this.renderProfile()}
                 {this.renderConfirmSubmit()}
+                {this.renderConfirmDelete()}
+                {this.renderRedirect()}
             </div>
         )
     }
