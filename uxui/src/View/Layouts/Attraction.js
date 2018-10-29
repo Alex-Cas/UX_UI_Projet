@@ -65,7 +65,8 @@ class Attraction extends Component
                     </Row>
                     <Row>
                         <Col>
-                            Date d'installation: {attraction.date}
+                            Date d'installation: {attraction.date}<br />
+                            Prix d'entrée: {Math.round(attraction.price / 10)} €
                         </Col>
                     </Row>
                     <Row className="text-center">
