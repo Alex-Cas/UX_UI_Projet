@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Modal, ModalHeader, ModalBody, ModalFooter, Button} from 'reactstrap'
+import {Modal, ModalBody, ModalFooter, Button} from 'reactstrap'
 
 
 class Confirm extends Component

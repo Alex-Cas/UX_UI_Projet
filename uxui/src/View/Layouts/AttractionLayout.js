@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import model from '../../Model/Attractions.js'
-import {Container, Row, Button, Card, CardTitle, CardBody, CardHeader} from 'reactstrap'
+import {Container, Row, Button, Card, CardBody, CardHeader} from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import AttractionItem from '../Components/AttractionItem.js'
 import Modal  from '../Components/Modals/NewAttraction.js'
@@ -33,7 +33,7 @@ class AttractionLayout extends Component
 
     addAttraction = (attraction) => {
 
-        var e = model.create(attraction)
+        model.create(attraction)
         this.setState({attraction: model.list(), newAttraction: attraction})
     }
 

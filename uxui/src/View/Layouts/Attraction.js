@@ -1,9 +1,8 @@
-import {Col, Card, CardBody, CardText, CardImg, Container, Row, Button, Collapse} from 'reactstrap'
+import {Col, Card, CardImg, Container, Row, Button, Collapse} from 'reactstrap'
 import React, { Component } from 'react'
 import MaintenanceItem from '../Components/MaintenanceItem.js'
 import model from '../../Model/Attractions.js'
 import maintenanceModel from '../../Model/Maintenances.js'
-import AttractionItem from '../Components/AttractionItem.js'
 
 import personnelModel from "../../Model/Personnel";
 import PersonnelItem from '../Components/PersonnelItem.js'

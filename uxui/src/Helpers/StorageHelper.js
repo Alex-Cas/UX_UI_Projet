@@ -70,10 +70,8 @@ class StorageHelper
             if (i.id !== id) {
                 newItems.push(i)
             }
+            return true
         })
-        console.log(key, id)
-        console.table(items)
-        console.table(newItems)
 
         this.apply(key, newItems)
         return true

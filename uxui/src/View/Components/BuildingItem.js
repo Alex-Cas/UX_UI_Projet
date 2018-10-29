@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import {Col, Card, CardBody, CardText, CardImg, Row} from 'reactstrap'
-
+import {Col, Card, CardBody, CardText, CardImg} from 'reactstrap'
 
 class BuildingItem extends Component
 {

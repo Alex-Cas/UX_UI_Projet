@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import model from '../../Model/Buildings.js'
-import {Container, Row, Col, CardImg, Card, CardTitle, CardBody, CardHeader} from 'reactstrap'
+import {Container, Row, Col, CardImg, Card} from 'reactstrap'
 
 class Building extends Component
 {

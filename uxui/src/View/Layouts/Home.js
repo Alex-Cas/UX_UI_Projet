@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import {Container, Col, Card, CardBody, CardText, CardImg, Row,
+import {Container, Col, CardImg, Row,
     Nav, NavItem, NavLink, TabContent, TabPane} from 'reactstrap'
 import {Line, Pie} from 'react-chartjs-2'
 
@@ -33,7 +33,7 @@ class Home extends Component
                 <div>
                 <Row>
                     <Col xs={8}>
-                        <CardImg className="m-3" style={{'maxWidth': '100%'}}  alt="Photo d'attraction" src={require("../../img/"+ "1" +".jpg")} />
+                        <CardImg className="m-3" style={{'maxWidth': '100%'}}  alt="Photo d'attraction" src={require("../../img/1.jpg")} />
                     </Col>
                     <Col xs={4}>
                         <p className="p-3">

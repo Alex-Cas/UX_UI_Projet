@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import {CardTitle} from 'reactstrap'
 import { Link } from 'react-router-dom'
-import personnelModel from '../../Model/Personnel.js'
-
-
 
 class MaintenanceItem extends Component
 {

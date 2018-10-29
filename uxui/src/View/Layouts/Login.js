@@ -4,11 +4,6 @@ import {Form, FormGroup, Container, Label, Input,
 
 class Login extends Component
 {
-    constructor(props) {
-        super(props)
-
-    }
-
     render() {
         return (
             <Container className="pt-5">

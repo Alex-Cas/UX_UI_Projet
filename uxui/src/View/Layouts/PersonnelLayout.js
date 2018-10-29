@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Container, Row, Button, Card, CardTitle, CardBody, CardHeader} from 'reactstrap'
+import {Container, Row, Button, Card, CardBody, CardHeader} from 'reactstrap'
 import PersonnelItem from '../Components/PersonnelItem.js'
 import Modal  from '../Components/Modals/NewPerson.js'
 import model from '../../Model/Personnel.js'
@@ -31,7 +31,7 @@ class PersonnelLayout extends Component
 
     addPerson = (person) => {
 
-        var e = model.create(person)
+        model.create(person)
         this.setState({personnel: model.list(), newPerson: person})
     }
 

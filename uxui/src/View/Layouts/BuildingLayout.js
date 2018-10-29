@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Container, Row, Button, Card, CardTitle, CardBody, CardHeader} from 'reactstrap'
+import {Container, Row, Button, Card, CardBody, CardHeader} from 'reactstrap'
 import BuildingItem from '../Components/BuildingItem.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import model from '../../Model/Buildings.js'
@@ -43,7 +43,7 @@ class BuildingLayout extends Component
 
     addBuilding = (building) => {
 
-        var e = model.create(building)
+        model.create(building)
         this.setState({buildings: model.list(), newBuilding: building})
     }
 

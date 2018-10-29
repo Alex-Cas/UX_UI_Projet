@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import {Modal, ModalHeader, ModalBody, ModalFooter, 
     Button, Form, FormGroup, Label, Input, InputGroup,
     InputGroupAddon, InputGroupText,
-    Container, Row, Tooltip} from 'reactstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+    Container, Tooltip} from 'reactstrap'
 import Ask from './Ask.js'
 
 
@@ -70,6 +69,9 @@ class NewPerson extends Component
                 if (value > 0) {
                     toReturn = true
                 }
+                break
+            default:
+                break
         }
         return toReturn
     }
@@ -174,8 +176,8 @@ class NewPerson extends Component
 
             var person = this.state.person
             return (
-                <Ask confirm={this.props.handler} item={this.state.person} toggle={this.props.toggle} toggleAsk={this.toggleAsk} toggleConfirm={this.props.toggleConfirm}
-                    text={'Êtes vous sûr de vouloir ajouter ' + this.state.person.firstName + ' ' + this.state.person.surname + ' ?'} />
+                <Ask confirm={this.props.handler} item={person} toggle={this.props.toggle} toggleAsk={this.toggleAsk} toggleConfirm={this.props.toggleConfirm}
+                    text={'Êtes vous sûr de vouloir ajouter ' + person.firstName + ' ' + person.surname + ' ?'} />
             )
         }
     }

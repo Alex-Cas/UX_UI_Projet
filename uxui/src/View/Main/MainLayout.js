@@ -6,11 +6,6 @@ import Routes from './Routes.js'
 
 class MainLayout extends Component
 {
-    constructor(props) {
-        super(props)
-
-    }
-
     render() {
         return (
             <BrowserRouter>

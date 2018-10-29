@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import {Button, Input, Form, Container, Card,
+import {Button, Input, Container, Card,
     CardBody, CardTitle, Col, Row, CardImg,
-    FormGroup, Label, InputGroup, InputGroupAddon,
+    FormGroup, InputGroup, InputGroupAddon,
     InputGroupText, UncontrolledTooltip, Collapse} from 'reactstrap'
 import { Redirect } from 'react-router'
 import MaintenanceItem from '../Components/MaintenanceItem.js'
@@ -108,7 +108,7 @@ class Person extends Component
 
     submitUpdate = (event) => {
 
-        var e = model.update(this.state.newPerson)
+        model.update(this.state.newPerson)
         this.setState({person: model.get(this.state.person.id), isEditing: false, askSubmit: false})
     }
 
@@ -138,6 +138,10 @@ class Person extends Component
                 if (value > 0) {
                     toReturn = true
                 }
+                break
+
+            default:
+                break
         }
         return toReturn
     }
@@ -382,7 +386,7 @@ class Person extends Component
         var maintenances = this.state.maintenances
         var attractions = this.state.attractions
 
-        if (maintenances.length == 0) {
+        if (maintenances.length === 0) {
 
             return (
                 <div className="text-center p-4">

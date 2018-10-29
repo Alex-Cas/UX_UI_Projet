@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import {Modal, ModalHeader, ModalBody, ModalFooter, 
-    Button, Form, FormGroup, Label, Input, InputGroup,
-    InputGroupAddon, InputGroupText,
-    Container, Row, Tooltip} from 'reactstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+    Button, Form, FormGroup, Label, Input,
+    Container, Tooltip} from 'reactstrap'
 import Ask from './Ask.js'
 
 
@@ -71,6 +69,9 @@ class NewAttraction extends Component
                 if (/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/.test(value)){
                     toReturn = true
                 }
+                break
+            default:
+                break
         }
         return toReturn
     }
@@ -156,8 +157,8 @@ class NewAttraction extends Component
 
             var attraction = this.state.attraction
             return (
-                <Ask confirm={this.props.handler} item={this.state.attraction} toggle={this.props.toggle} toggleAsk={this.toggleAsk} toggleConfirm={this.props.toggleConfirm}
-                    text={'Êtes vous sûr de vouloir ajouter l\'attraction' + this.state.attraction.name + ' au prix de ' + this.state.attraction.price + ' ?'} />
+                <Ask confirm={this.props.handler} item={attraction} toggle={this.props.toggle} toggleAsk={this.toggleAsk} toggleConfirm={this.props.toggleConfirm}
+                    text={'Êtes vous sûr de vouloir ajouter l\'attraction' + attraction.name + ' au prix de ' + attraction.price + ' ?'} />
             )
         }
     }

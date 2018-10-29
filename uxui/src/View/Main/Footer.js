@@ -13,9 +13,9 @@ class Footer extends Component
                         </Col>
                         
                         <Col xs={4}>
-                            <a href={"#"}>Contacter AuliLand</a><br/>
-                            <a href={"#"}>Vivez l'Experience</a><br/>
-                            <a href={"#"}>Votre nos site partenaire</a><br/>
+                            <a href="/#">Contacter AuliLand</a><br/>
+                            <a href="/#">Vivez l'Experience</a><br/>
+                            <a href="/#">Votre nos site partenaire</a><br/>
                         </Col>
                         
                         <Col xs={4}>
@@ -24,7 +24,7 @@ class Footer extends Component
                     </Row>
                 </Container>
                 <div className="text-center py-2 bg-dark">© 2018 Copyright: &nbsp;
-                    <a href={"#"}>Auliland.com</a>
+                    <a href="/#">Auliland.com</a>
                 </div>
             </footer>
         )
