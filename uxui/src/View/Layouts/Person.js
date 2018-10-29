@@ -382,22 +382,33 @@ class Person extends Component
         var maintenances = this.state.maintenances
         var attractions = this.state.attractions
 
-        return (
-            <Row>
-                {maintenances.map((item, idx) => {
-                    return (
-                        <Col xs={12} md={6} key={idx} className="my-3">
-                            <Card className="py-3">
-                                <MaintenanceItem maintenance={item}/>
-                                <div className="justify-content-center">
-                                    <AttractionItem attraction={attractions[item.attraction_id]}/>
-                                </div>
-                            </Card>
-                        </Col>
-                    )
-                })}
-            </Row>
-        )
+        if (maintenances.length == 0) {
+
+            return (
+                <div className="text-center p-4">
+                    <span>Cette personne n'a effectué aucune maintenance</span>
+                </div>
+            )
+        }
+        else {
+
+            return (
+                <Row>
+                    {maintenances.map((item, idx) => {
+                        return (
+                            <Col xs={12} md={6} key={idx} className="my-3">
+                                <Card className="py-3">
+                                    <MaintenanceItem maintenance={item}/>
+                                    <div className="justify-content-center">
+                                        <AttractionItem attraction={attractions[item.attraction_id]}/>
+                                    </div>
+                                </Card>
+                            </Col>
+                        )
+                    })}
+                </Row>
+            )
+        }
     }
 
     renderProfile = () => {
